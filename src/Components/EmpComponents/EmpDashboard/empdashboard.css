@@ -1,0 +1,23 @@
+.Scrollbardesign::-webkit-scrollbar {
+  width: 6px;
+  margin-left: -10px;
+}
+
+/* Track */
+.Scrollbardesign::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.Scrollbardesign::-webkit-scrollbar-thumb {
+  background: indigo;
+}
+
+/* Handle on hover */
+.Scrollbardesign::-webkit-scrollbar-thumb:hover {
+  background: indigo;
+}
+
+.overflowynone {
+  overflow: hidden;
+}

@@ -1,0 +1,41 @@
+.IdleAdd {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.IdleAdd-inner {
+  position: relative;
+}
+.IdleAdd-inner .close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.Scrollbardesign::-webkit-scrollbar {
+  width: 6px;
+  margin-left: -10px;
+}
+
+/* Track */
+.Scrollbardesign::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.Scrollbardesign::-webkit-scrollbar-thumb {
+  background: rgb(55, 55, 177);
+}
+
+/* Handle on hover */
+.Scrollbardesign::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 128);
+}
