@@ -1,8 +1,13 @@
 import React from 'react'
-
+import Empnav from '../../ANavbar/Empnav'
+import EmpLeaveMain from './EmpLeaveMain'
 const EmpLeave = () => {
   return (
-    <div>EmpLeave</div>
+    <div>
+      <Empnav title="Leave"/>
+      <EmpLeaveMain/>
+    </div>
+   
   )
 }
 

@@ -7,7 +7,7 @@
     @apply flex flex-row items-center justify-center;
   }
   .flexcolumncontainer {
-    @apply flex flex-column items-center justify-center;
+    @apply flex flex-col items-center justify-center;
   }
   .select2-results__group {
     @apply text-lg font-bold text-gray-900;

@@ -1,16 +1,13 @@
 import React, { useContext } from "react";
+
 import CrudTable from "../../../assitComponet/table/CrudTable";
-
-import { EmpGlobalState } from "../../../Globalsate/EmpGlobalState";
-import IdleADDing from "./IdleADDing";
 import Crudfilter from "../../../assitComponet/table/CrudFilter/Crudfilter";
-import "./idleAdd.css";
-import TaskVeiwDetail from "./TaskVeiwDetail";
-
-const EmpTasktable = ({ initialData, headerData }) => {
-  const { Singledatadispatch } = useContext(EmpGlobalState);
+import { EmpGlobalState } from "../../../Globalsate/EmpGlobalState";
+import CreateViewDetail from "./CreateViewDetail";
+const EmpCreateTable = ({ initialData, headerData }) => {
+  const { datadispatCreate } = useContext(EmpGlobalState);
   return (
-    <div className="">
+    <div>
       <div className="flex flex-wrap lg:flex-nowrap  max-w-[300px] lg:max-w-[1150px] lg:space-x-2 md:min-w-[120vh] min-w-[40vh]  lg:min-w-[126vh] lg:mb-0 mb-[50px]">
         <CrudTable
           initialData={initialData}
@@ -28,13 +25,12 @@ const EmpTasktable = ({ initialData, headerData }) => {
           DeleteBtnview={true}
           fontcheckbtnonly={true}
           fontbtnview={true}
-          dispatcheddata={Singledatadispatch}
+          dispatcheddata={datadispatCreate}
         />
-        <TaskVeiwDetail headerData={headerData} />
-        <IdleADDing />
+        <CreateViewDetail headerData={headerData} />
       </div>
     </div>
   );
 };
 
-export default EmpTasktable;
+export default EmpCreateTable;

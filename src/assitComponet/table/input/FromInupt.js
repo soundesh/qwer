@@ -3,7 +3,7 @@ import "./Input.css";
 const FromInupt = ({ Name, formed, tableData, ValueData }) => {
   return (
     <React.Fragment>
-      <div className="searchdesign">
+      <div>
         <input
           type="text"
           name={Name}

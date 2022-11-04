@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import CommonTable from "../../assitComponet/normaltable/CommonTable";
+import React, { useCallback } from "react";
+import Hrholidaytable from "./Hrholidaytable";
+import YearLeave from "../../GenralComponent/YearLeave";
 const initialState = [
   {
     id: "126",
@@ -75,35 +76,13 @@ const initialState = [
   },
 ];
 
-const dataheader2 = ["Leave date", "Leave Type", "holiday"];
-const YearLeave = () => {
-  const [allData, setAllData] = useState(initialState);
-  const [filteredData, setFilteredData] = useState(allData);
-
-  const sortedate = filteredData.sort(function compare(a, b) {
-    var dateA = new Date(
-      `${a.leavedate.split("/")[1]}/${a.leavedate.split("/")[0]}/${
-        a.leavedate.split("/")[2]
-      } `
-    );
-    var dateB = new Date(
-      `${b.leavedate.split("/")[1]}/${b.leavedate.split("/")[0]}/${
-        b.leavedate.split("/")[2]
-      } `
-    );
-    return dateA - dateB;
-  });
-
+const EmpHoliday = () => {
   return (
-    <div className="border-2 border-gray-200 p-2">
-      <CommonTable
-        initialData={allData}
-        headerData={dataheader2}
-        title="Holiday leaves"
-        Design="min-h-[45vh] bg-white "
-      />
+    <div className="flex flex-row flex-wrap">
+      <Hrholidaytable hideBtn={true} initialData={initialState} />
+      <YearLeave />
     </div>
   );
 };
 
-export default YearLeave;
+export default EmpHoliday;

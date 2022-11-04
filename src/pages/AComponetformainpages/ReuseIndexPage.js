@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import { EmpGlobalState } from "../../Globalsate/EmpGlobalState";
 import { NavLink } from "react-router-dom";
 const ReuseIndexPage = ({ children, LinkMenu }) => {
+  const { Singledatadispatch } = useContext(EmpGlobalState);
+  const clickHandler = (e) => {
+    e.preventDefault();
+    Singledatadispatch({
+      type: "normal",
+    });
+  };
   return (
     <React.Fragment>
       <div className="lg:hidden  w-full min-h-full">
@@ -19,12 +27,19 @@ const ReuseIndexPage = ({ children, LinkMenu }) => {
                     <div className="flex flex-row items-center justify-center  md:h-[40px] h-[40px] w-full space-x-4 md:space-x-12 md:text-3xl text-xl itmes-center ">
                       {LinkMenu?.map((item, index) => {
                         return (
-                          <div
+                          <NavLink
+                            to={item.path}
                             key={index}
-                            className="w-[30px] h-[30px] md:max-w-[60px]  md:h-[40px] rounded-[4px] md:rounded-[6px] flex flex-row items-center justify-center grow hover:bg-sky-400 "
+                            className="link"
+                            onClick={(e) => clickHandler(e)}
                           >
-                            <div className="text-white">{item.icon}</div>
-                          </div>
+                            <div
+                              key={index}
+                              className="w-[30px] h-[30px] md:max-w-[60px]  md:h-[40px] rounded-[4px] md:rounded-[6px] flex flex-row items-center justify-center grow hover:bg-sky-400 "
+                            >
+                              <div className="text-white">{item.icon}</div>
+                            </div>
+                          </NavLink>
                         );
                       })}
                     </div>

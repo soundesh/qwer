@@ -1,20 +1,34 @@
 import React from "react";
 
-const SelectorFrom = ({ labeled, sizewidth, OptionData, datavalue }) => {
+const SelectorFrom = ({
+  labeled,
+  sizewidth,
+  OptionData,
+  setTrigger,
+  Trigger,
+  Triggername,
+  labeldesign,
+  defaultValue,
+}) => {
   return (
     <div>
       <div>
-        <label htmlFor={labeled}>{labeled}</label>
+        <label htmlFor={labeled} className={`${labeldesign}`}>
+          {labeled}
+        </label>
       </div>
       <select
         name={labeled}
         id={labeled}
-        value={datavalue}
+        defaultValue={defaultValue}
         className={`w-${sizewidth} min-w-[200px] rounded-[4px] border-indigo-800 max-h-[200px] overflow-auto `}
+        onChange={(e) => {
+          setTrigger({ ...Trigger, [Triggername]: e.target.value });
+        }}
       >
-        {OptionData.map((item) => {
+        {OptionData.map((item, index) => {
           return (
-            <option value={item} key={item}>
+            <option value={item} key={index}>
               {item}
             </option>
           );

@@ -1,7 +1,9 @@
 import React from 'react'
-import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 const IconBage = ({IconName,Showcount,Icon,Iconcolor,InconType}) => {
+  
+  {/* .....  <IconBage IconName="Notification" Showcount="4" Icon="" InconType="fa-solid fa-bell" Iconcolor="text-gray-400"/>
+*/}
   return (
     <div className="flex flex-row items-center justify-center space-x-4">
       
@@ -19,6 +21,4 @@ const IconBage = ({IconName,Showcount,Icon,Iconcolor,InconType}) => {
           </div>
   )
 }
-  {/* .....  <IconBage IconName="Notification" Showcount="4" Icon="" InconType="fa-solid fa-bell" Iconcolor="text-gray-400"/>
-*/}
 export default IconBage

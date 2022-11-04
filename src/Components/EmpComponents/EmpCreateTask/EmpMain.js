@@ -1,7 +1,5 @@
 import React, { useCallback, useState, useEffect } from "react";
-import IconBage from "../../../assitComponet/IconBage/IconBage";
-
-import EmpTasktable from "../../../allTable/Emptable/EmpTaskTable/EmpTasktable";
+import EmpCreateTable from "../../../allTable/Emptable/EmpCreateTable/EmpCreateTable";
 const inititalState1 = [
   {
     id: "1230",
@@ -183,7 +181,8 @@ const headerstate = [
   "Status",
   "Approved",
 ];
-const EmptaskMain = () => {
+
+const EmpMain = () => {
   const [allData] = useState(inititalState1);
   const datasetup = useCallback(() => {
     const DataArray = [];
@@ -262,34 +261,12 @@ const EmptaskMain = () => {
     }
     return { initialaData: DataArray, taskstatuslength: notifylength };
   }, []);
-  useEffect(() => {}, [datasetup]);
-  return (
-    <div className=" min-w-full flex-grow  ">
-      <div className="flex flexcolumncontainer flex-row min-h-[50px] max-h-[50px] bg-gray-50 md:space-x-8 lg:space-x-8 space-x-7 flex-wrap items-center justify-center">
-        <IconBage
-          IconName="New Task"
-          Showcount="4"
-          Icon=""
-          InconType="fa-solid fa-list-check"
-          Iconcolor="text-gray-700"
-        />
 
-        {datasetup().taskstatuslength.map((item, index) => {
-          return (
-            <div key={index}>
-              <IconBage
-                IconName={item.name}
-                Showcount={item.length}
-                Icon={item.icon}
-                InconType={item.InconType}
-                Iconcolor="text-gray-700"
-              />
-            </div>
-          );
-        })}
-      </div>
+  console.log(datasetup().initialaData);
+  return (
+    <div>
       <div className="flex justify-center">
-        <EmpTasktable
+        <EmpCreateTable
           initialData={datasetup().initialaData}
           headerData={headerstate}
         />
@@ -298,4 +275,4 @@ const EmptaskMain = () => {
   );
 };
 
-export default EmptaskMain;
+export default EmpMain;

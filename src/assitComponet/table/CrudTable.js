@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Tooltip } from "@mui/material";
-
 import CheckBoxdesign from "./Checkbox/CheckBoxdesign";
 import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
+import ReuseButton from "../button/ReuseButton";
 import "./CrudTable.css";
 const CrudTable = ({
   initialData,
@@ -12,7 +12,6 @@ const CrudTable = ({
   Design,
   tableDesign,
   tableheight,
-  Addingcomponent,
   FiliterComponent,
   Adding,
   editing,
@@ -23,6 +22,7 @@ const CrudTable = ({
   fontbtnview,
   backbtnview,
   fontcheckbtnonly,
+  dispatcheddata,
 }) => {
   const [fronthidden, setFronthidden] = useState(fontbtnview);
   const [backhidden, setbackhidden] = useState(backbtnview);
@@ -32,8 +32,6 @@ const CrudTable = ({
   //adding
   const [addState, setAddState] = useState(Adding);
   const [add, setAdd] = useState(false);
-  const [AddingItem, setAddingItem] = useState();
-  const [AddingShow, setAddingshow] = useState(false);
   // edit
   const [editState, setEditState] = useState(editing);
   const [edit, setEdit] = useState(true);
@@ -42,7 +40,6 @@ const CrudTable = ({
   const [editHidden, setEditHidden] = useState(editbtnview);
 
   //delete
-  const [Delete, setDelete] = useState();
   const [Deletehidden, setDeletehidden] = useState(DeleteBtnview);
   //checked state
   const [allCheck, setAllCheck] = useState(false);
@@ -56,7 +53,7 @@ const CrudTable = ({
 
   // filtering date ,project ,state
   const [showfilterData, setshowfilterData] = useState(false);
-
+  //golbal state
   const handleSearch = (event) => {
     const value = event.target.value.toLowerCase();
     const result = allData.filter((item) => {
@@ -166,14 +163,6 @@ const CrudTable = ({
     setshowfilterData,
     selectedAllCheckbox,
   ]);
-  //   <div>
-  //   <CommonTable
-  //     initialData={Dummydata}
-  //     headerData={empTaskheader}
-  //     title="Task Status"
-  //     Design="with"
-  //   />
-  // </div>
   return (
     <div
       className={` ${Design} Scrollbardesign  border-2 border-gray-400   rounded-lg overflow-auto`}
@@ -181,14 +170,7 @@ const CrudTable = ({
       <h1 className="headerfont bg-indigo-700 text-white mt-2 py-2 pl-2 lg:text-2xl md:text-xl text-xl  ">
         {title}
       </h1>
-
-      {selectedNotEmpty ? (
-        selectedcheckdelete ? (
-          <div>multiple delete</div>
-        ) : (
-          <div>single delete</div>
-        )
-      ) : null}
+      {/* 
       {addState ? (
         add ? (
           <div>
@@ -201,7 +183,7 @@ const CrudTable = ({
             }
           </div>
         ) : null
-      ) : null}
+      ) : null} */}
       {editState ? edit ? null : <div>hello</div> : null}
       <Paper elevation={2} className="mb-3 mx-0.5 lg:min-h-[30px]">
         <div className="flex lg:flex-row flex-wrap items-center justify-between mx-2 -mb-2 lg:text-lg p-2">
@@ -220,34 +202,50 @@ const CrudTable = ({
             </label>
           </div>
           <div className="mr-3.5 flex flex-row  flex-wrap items-center space-y-1">
-            {addState ? (
-              <div className=" btnFocus inline-block  bg-blue-600 m-1 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
-                <Tooltip title="Add Idle">
-                  <button
-                    type="button"
-                    className="btnFocus  px-6 py-2.5"
-                    onClick={() => {
-                      setAdd(!add);
-                    }}
-                  >
-                    Add
-                  </button>
-                </Tooltip>
-              </div>
-            ) : null}
             <div>
-              <div
-                className=" btnFocus inline-block  bg-blue-600 m-1  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                onClick={() => {
+              {selectedNotEmpty ? (
+                selectedcheckdelete ? (
+                  <ReuseButton
+                    btncolor="red"
+                    onclicked={onallcheckhandleDelete}
+                    btntype="button"
+                    btnname="delete all"
+                  />
+                ) : (
+                  <ReuseButton
+                    btncolor="red"
+                    onclicked={onSelectedcheckdelete}
+                    btntype="button"
+                    btnname="selected delete"
+                  />
+                )
+              ) : null}
+            </div>
+
+            <div>
+              {addState ? (
+                <ReuseButton
+                  btncolor="blue"
+                  onclicked={() => {
+                    dispatcheddata({
+                      type: "createState",
+                    });
+                  }}
+                  btntype="button"
+                  btnname="Create"
+                />
+              ) : null}
+            </div>
+
+            <div>
+              <ReuseButton
+                btncolor="blue"
+                onclicked={() => {
                   setshowfilterData(true);
                 }}
-              >
-                <Tooltip title="filter">
-                  <button type="button" className="btnFocus px-6 py-2.5">
-                    filter
-                  </button>
-                </Tooltip>
-              </div>
+                btntype="button"
+                btnname="filter"
+              />
               {showfilterData ? (
                 <div className="-ml-20">
                   <FiliterComponent
@@ -257,23 +255,19 @@ const CrudTable = ({
                 </div>
               ) : null}
             </div>
-            <div className=" btnFocus inline-block bg-blue-600 m-1  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
-              <Tooltip title="show">
-                <button
-                  type="button"
-                  className="btnFocus px-6 py-2.5 "
-                  onClick={() => {
-                    setShow(!show);
-                  }}
-                >
-                  Show
-                </button>
-              </Tooltip>
+            <div>
+              <ReuseButton
+                btncolor="blue"
+                onclicked={() => {
+                  setShow(!show);
+                }}
+                btntype="button"
+                btnname="show"
+              />
             </div>
           </div>
         </div>
       </Paper>
-
       <div
         className={
           show
@@ -402,7 +396,12 @@ const CrudTable = ({
                                       <div>
                                         <Tooltip
                                           title="edit"
-                                          onClick={() => OnhandleEdit(item)}
+                                          onClick={() => {
+                                            dispatcheddata({
+                                              type: "edit",
+                                              value: item,
+                                            });
+                                          }}
                                         >
                                           <IconButton
                                             form="my_form1"
@@ -445,6 +444,9 @@ const CrudTable = ({
                       <Tooltip
                         key={index}
                         title={`${Object.keys(item)[index]}`}
+                        onClick={() => {
+                          dispatcheddata({ type: "view", value: item });
+                        }}
                       >
                         <td>
                           <p className="leading-2">{item[data]}</p>
