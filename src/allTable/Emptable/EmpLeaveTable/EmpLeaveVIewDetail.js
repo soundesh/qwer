@@ -6,9 +6,27 @@ import ReuseButton from "../../../assitComponet/button/ReuseButton";
 const EmpLeaveVIewDetail = ({ headerData }) => {
   const { dataleave, datadispatchleave } = useContext(EmpGlobalState);
 
-  const [updateTaskData, setUpdateTaskData] = useState();
+  const [updateTaskData, setUpdateTaskData] = useState({
+    id: "23546432",
+    user: "",
+    empId: "",
+
+    date: "",
+    from: "",
+    to: "",
+    lop: "",
+    Days: "",
+    leaveType: "",
+    reason: "",
+    reasonleave: "",
+    L1aproverandremarks: "",
+    L2aproverandremarks: "",
+    L3aproverandreamarks: "",
+  });
   useEffect(() => {
-    setUpdateTaskData(dataleave.projectdetail);
+    if (dataleave.projectdetail !== {}) {
+      setUpdateTaskData(dataleave.projectdetail);
+    }
   }, [dataleave]);
 
   function today() {

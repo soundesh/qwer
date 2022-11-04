@@ -6,9 +6,26 @@ import ReuseButton from "../../../assitComponet/button/ReuseButton";
 const TaskVeiwDetail = ({ headerData }) => {
   const { singledata, Singledatadispatch } = useContext(EmpGlobalState);
 
-  const [updateTaskData, setUpdateTaskData] = useState();
+  const [updateTaskData, setUpdateTaskData] = useState({
+    id: "1233",
+    taskdate: "",
+    taskgiven: "",
+    taskassigned: "",
+    project: "",
+    task: "",
+    Approverremarks: "",
+    empremarks: "",
+    worked: "",
+    clocked: "",
+    utilised: "",
+    efficiency: "",
+    taskStatus: "",
+    approvedstatus: "",
+  });
   useEffect(() => {
-    setUpdateTaskData(singledata.projectdetail);
+    if (singledata.projectdetail !== {}) {
+      setUpdateTaskData(singledata.projectdetail);
+    }
   }, [singledata]);
   const onChangeUpdate = (e) => {
     const { name, value } = e.target;
@@ -34,23 +51,24 @@ const TaskVeiwDetail = ({ headerData }) => {
       {singledata.showdetail ? (
         <Paper>
           <div className="p-4 border-2 border-gray-400 rounded-lg lg:mx-1 mx-1   lg:max-w-full md:max-w-full lg:min-w-[500px] max-w-[270px] justify-center lg:my-2">
-            <div className="headerfont bg-indigo-700 text-white flex justify-between  lg:py-2 lg:pl-2 lg:text-xl md:text-xl text-xl ">
-              <div>
-                <h1>Project Detail</h1>
+            <Paper elevation={1}>
+              <div className="headerfont bg-indigo-700 text-white flex justify-between  lg:py-2 lg:pl-2 lg:text-xl md:text-xl text-xl ">
+                <div>
+                  <h1>Project Detail</h1>
+                </div>
+                <div
+                  onClick={() => {
+                    Singledatadispatch({
+                      type: "normal",
+                    });
+                  }}
+                >
+                  <h1 className="font-bold text-2xl text-white pr-5 hover:text-3xl">
+                    X
+                  </h1>
+                </div>
               </div>
-              <div
-                onClick={() => {
-                  Singledatadispatch({
-                    type: "normal",
-                  });
-                }}
-              >
-                <h1 className="font-bold text-2xl text-white pr-5 hover:text-3xl">
-                  X
-                </h1>
-              </div>
-            </div>
-
+            </Paper>
             <form
               onSubmit={ontaskUpdateSubmit}
               className="flex flex-col items-center justify-center"
