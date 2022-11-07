@@ -8,10 +8,11 @@ const SelectorFrom = ({
   Trigger,
   Triggername,
   labeldesign,
+  selectdesign,
   defaultValue,
 }) => {
   return (
-    <div>
+    <div className={`${selectdesign}`}>
       <div>
         <label htmlFor={labeled} className={`${labeldesign}`}>
           {labeled}
@@ -21,7 +22,7 @@ const SelectorFrom = ({
         name={labeled}
         id={labeled}
         defaultValue={defaultValue}
-        className={`w-${sizewidth} min-w-[200px] rounded-[4px] border-indigo-800 max-h-[200px] overflow-auto `}
+        className={`w-${sizewidth} lg:min-w-[200px] min-w-[160px]  md:min-w-[200px] rounded-[4px] border-indigo-800 max-h-[200px] overflow-auto `}
         onChange={(e) => {
           setTrigger({ ...Trigger, [Triggername]: e.target.value });
         }}

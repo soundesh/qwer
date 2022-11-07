@@ -28,41 +28,6 @@ const EmpLeaveVIewDetail = ({ headerData }) => {
       setUpdateTaskData(dataleave.projectdetail);
     }
   }, [dataleave]);
-
-  function today() {
-    let d = new Date();
-    let currDate = d.getDate();
-    let currMonth = d.getMonth() + 1;
-    let currYear = d.getFullYear();
-    return (
-      (currDate < 10 ? "0" + currDate : currDate) +
-      "/" +
-      (currMonth < 10 ? "0" + currMonth : currMonth) +
-      "/" +
-      currYear
-    );
-  }
-  const TodayDate = today();
-
-  const totalDayLeave = () => {
-    const value3 = "0";
-    const value1 = new Date(updateTaskData.from);
-    const value2 = new Date(updateTaskData.to);
-    if (value1 !== " " && value2 !== " ") {
-      var diff = value2.getTime() - value1.getTime();
-
-      var daydiff = diff / (1000 * 60 * 60 * 24);
-      if (daydiff + 1 <= 0) {
-        updateTaskData.Days = "0";
-        return value3;
-      }
-      updateTaskData.Days = daydiff + 1;
-      return daydiff + 1;
-    }
-    updateTaskData.Days = 0;
-    return value3;
-  };
-
   const onChangeUpdate = (e) => {
     const { name, value } = e.target;
     setUpdateTaskData({

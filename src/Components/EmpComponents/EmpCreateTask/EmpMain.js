@@ -1,4 +1,7 @@
 import React, { useCallback, useState, useEffect } from "react";
+import IconBage from "../../../assitComponet/IconBage/IconBage";
+import ProjectAssignDetail from "./ProjectAssignDetail";
+import Paper from "material-ui/Paper";
 import EmpCreateTable from "../../../allTable/Emptable/EmpCreateTable/EmpCreateTable";
 const inititalState1 = [
   {
@@ -183,7 +186,8 @@ const headerstate = [
 ];
 
 const EmpMain = () => {
-  const [allData] = useState(inititalState1);
+  const [allData, setAllData] = useState(inititalState1);
+  const [showProject, setshowProject] = useState(true);
   const datasetup = useCallback(() => {
     const DataArray = [];
     const notifylength = [];
@@ -262,15 +266,71 @@ const EmpMain = () => {
     return { initialaData: DataArray, taskstatuslength: notifylength };
   }, []);
 
-  console.log(datasetup().initialaData);
   return (
-    <div>
-      <div className="flex justify-center">
-        <EmpCreateTable
-          initialData={datasetup().initialaData}
-          headerData={headerstate}
+    <div className="flex flex-col justify-center  min-w-[300px] ">
+      <div className="border-b-2 flex flexcolumncontainer flex-row min-h-[50px] max-h-[50px] bg-gray-50 md:space-x-8 lg:space-x-8 space-x-7 flex-wrap items-center justify-center">
+        <IconBage
+          IconName="New Task"
+          Showcount="4"
+          Icon=""
+          InconType="fa-solid fa-list-check"
+          Iconcolor="text-gray-700"
         />
+
+        {datasetup().taskstatuslength.map((item, index) => {
+          return (
+            <div key={index}>
+              <IconBage
+                IconName={item.name}
+                Showcount={item.length}
+                Icon={item.icon}
+                InconType={item.InconType}
+                Iconcolor="text-gray-700"
+              />
+            </div>
+          );
+        })}
       </div>
+      <Paper elevation={2} className="mb-4">
+        <div className="flex item-center  min-h-[70px] ">
+          <nav>
+            <ul className="DESKTOP-MENU flex -mb-5 ">
+              <li>
+                <button
+                  onClick={() => {
+                    setshowProject(true);
+                  }}
+                  className=" btnFocus focus:bg-gray-200 py-2 px-3 border-b-4 border-gray-400 min-w-[140px] focus:border-b-4  focus:border-b-blue-500 "
+                >
+                  Home
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => {
+                    setshowProject(false);
+                  }}
+                  className=" btnFocus focus:bg-gray-200 py-2 px-3 border-b-4 border-gray-400 min-w-[140px] focus:border-b-4  focus:border-b-blue-500 "
+                >
+                  Project
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </Paper>
+      {showProject ? (
+        <div className="flex justify-center">
+          <EmpCreateTable
+            initialData={datasetup().initialaData}
+            headerData={headerstate}
+          />
+        </div>
+      ) : (
+        <div>
+          <ProjectAssignDetail />
+        </div>
+      )}
     </div>
   );
 };

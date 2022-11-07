@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-
+import SelectorFrom from "../../../assitComponet/SelectorFrom";
 import { EmpGlobalState } from "../../../Globalsate/EmpGlobalState";
 import { Paper } from "@mui/material";
 import ReuseButton from "../../../assitComponet/button/ReuseButton";
@@ -266,6 +266,25 @@ const TaskVeiwDetail = ({ headerData }) => {
                           );
                         }
 
+                        if (index === 10) {
+                          return (
+                            <div className="  flex py-1 px-2 items-center ">
+                              <SelectorFrom
+                                labeled="task Status "
+                                defaultValue={
+                                  singledata.projectdetail.taskStatus
+                                }
+                                labeldesign="text-blue-400  text-base uppercase"
+                                OptionData={["Select", "complete", "pending"]}
+                                sizewidth="1"
+                                setTrigger={setUpdateTaskData}
+                                Trigger={updateTaskData}
+                                Triggername="taskStatus"
+                              />
+                            </div>
+                          );
+                        }
+
                         if (index > 7 && index < 11) {
                           return (
                             <div
@@ -304,15 +323,7 @@ const TaskVeiwDetail = ({ headerData }) => {
                             </div>
                           );
                         }
-
-                        return <React.Fragment key={index}></React.Fragment>;
-                      }
-                    )}
-                  </div>
-                  <div className="lg:flex md:flex md:flex-wrap md:pt-1 lg:flex-wrap lg:pt-1 ">
-                    {Object.keys(singledata.projectdetail).map(
-                      (item, index) => {
-                        if (index >= 11) {
+                        if (index === 13 || index === 11) {
                           return (
                             <div
                               key={index}

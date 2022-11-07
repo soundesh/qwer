@@ -1,13 +1,30 @@
 import React, { useContext, useState, useEffect } from "react";
 import { EmpGlobalState } from "../../../Globalsate/EmpGlobalState";
+import SelectorFrom from "../../../assitComponet/SelectorFrom";
 import ReuseButton from "../../../assitComponet/button/ReuseButton";
 import { Paper } from "@mui/material";
 const CreateViewDetail = ({ headerData }) => {
   const { dataCreate, datadispatCreate } = useContext(EmpGlobalState);
 
-  const [updateTaskData, setUpdateTaskData] = useState();
+  const [updateTaskData, setUpdateTaskData] = useState({
+    id: "1233",
+    taskdate: "",
+    taskgiven: "",
+    taskassigned: "",
+    project: "",
+    task: "",
+    Approverremarks: "",
+    empremarks: "",
+    worked: "",
+    clocked: "",
+    utilised: "",
+    efficiency: "",
+    taskStatus: "",
+    approvedstatus: "",
+  });
   useEffect(() => {
-    setUpdateTaskData(dataCreate.projectdetail);
+    if (dataCreate.projectdetail !== {})
+      setUpdateTaskData(dataCreate.projectdetail);
   }, [dataCreate]);
   const onChangeUpdate = (e) => {
     const { name, value } = e.target;
@@ -25,7 +42,6 @@ const CreateViewDetail = ({ headerData }) => {
     setUpdateTaskData({
       type: "normal",
     });
-
     console.log("emp task update ", updateTaskData);
   };
 
@@ -196,7 +212,7 @@ const CreateViewDetail = ({ headerData }) => {
                   <div className="flex flex-row flex-wrap  ">
                     {Object.keys(dataCreate.projectdetail).map(
                       (item, index) => {
-                        if (index === 6) {
+                        if (index === 5) {
                           return (
                             <div
                               key={index}
@@ -212,22 +228,22 @@ const CreateViewDetail = ({ headerData }) => {
                           );
                         }
 
-                        if (index === 7) {
+                        if (index === 6) {
                           return (
                             <div>
-                              <div key="empremarks">
+                              <div key="Approverremarks">
                                 <div>
                                   <label
-                                    htmlFor="empremarks"
+                                    htmlFor="Approverremarks"
                                     className="text-blue-400  max-h-[50px] text-base uppercase "
                                   >
-                                    Employee Remarks
+                                    Approver Remarks
                                   </label>
                                 </div>
 
                                 <textarea
-                                  id="empremarks"
-                                  name="empremarks"
+                                  id="Approverremarks"
+                                  name="Approverremarks"
                                   type="text"
                                   defaultValue={
                                     Object.values(dataCreate.projectdetail)[
@@ -236,7 +252,7 @@ const CreateViewDetail = ({ headerData }) => {
                                   }
                                   rows="2"
                                   cols="30"
-                                  placeholder="employee remarks about project task"
+                                  placeholder="Approver remarks"
                                   onChange={(e) => {
                                     onChangeUpdate(e);
                                   }}
@@ -248,53 +264,26 @@ const CreateViewDetail = ({ headerData }) => {
                           );
                         }
 
-                        if (index > 7 && index < 11) {
+                        if (index === 13) {
                           return (
-                            <div
-                              key={Object.keys(dataCreate.projectdetail)[index]}
-                              className="max-w-[140px] p-1   m-1  "
-                            >
-                              <label
-                                htmlFor={
-                                  Object.keys(dataCreate.projectdetail)[index]
-                                }
-                                className="text-blue-400  text-base uppercase"
-                              >
-                                {headerData[index]}
-                              </label>
-
-                              <input
-                                id={
-                                  Object.keys(dataCreate.projectdetail)[index]
-                                }
-                                type="text"
+                            <div className="  flex py-1 px-2 items-center ">
+                              <SelectorFrom
+                                labeled="Approved Status"
                                 defaultValue={
-                                  Object.values(dataCreate.projectdetail)[index]
+                                  dataCreate.projectdetail.approvedstatus
                                 }
-                                name={
-                                  Object.keys(dataCreate.projectdetail)[index]
-                                }
-                                placeholder={
-                                  Object.keys(dataCreate.projectdetail)[index]
-                                }
-                                size="4"
-                                onChange={(e) => {
-                                  onChangeUpdate(e);
-                                }}
-                                className="resize-none border-indigo-800 rounded-md border-2 min-w-[200px] md:min-w-[200px] lg:min-w-[140px] p-2"
+                                labeldesign="text-blue-400  text-base uppercase"
+                                OptionData={["Select", "yes", "no"]}
+                                sizewidth="1"
+                                setTrigger={setUpdateTaskData}
+                                Trigger={updateTaskData}
+                                Triggername="approvedstatus"
                               />
                             </div>
                           );
                         }
 
-                        return <React.Fragment key={index}></React.Fragment>;
-                      }
-                    )}
-                  </div>
-                  <div className="lg:flex md:flex md:flex-wrap md:pt-1 lg:flex-wrap lg:pt-1 ">
-                    {Object.keys(dataCreate.projectdetail).map(
-                      (item, index) => {
-                        if (index >= 11) {
+                        if (index >= 10) {
                           return (
                             <div
                               key={index}
@@ -309,7 +298,6 @@ const CreateViewDetail = ({ headerData }) => {
                             </div>
                           );
                         }
-
                         return <React.Fragment key={index}></React.Fragment>;
                       }
                     )}

@@ -8,7 +8,7 @@ const Header = () => {
     <React.Fragment>
       <Paper elevation={24}>
         <div
-          className="headerzindex lg:h-[7vh]  lg:min-h-[70px] hover:drop-shadow-md drop-shadow-xl flex flex-row  bg-indigo-700 text-white  my-0.5 lg:py-2 z-50
+          className="headerzindex lg:h-[7vh]  lg:max-h-[50px] hover:drop-shadow-md drop-shadow-xl flex flex-row  bg-indigo-700 text-white  my-0.5 lg:py-2 z-50
         "
         >
           <div className="flex flex-row items-center   flex-wrap justify-between  grow ">

@@ -70,11 +70,7 @@ export const EmpDataProvider = ({ children }) => {
   const [dataleave, datadispatchleave] = useReducer(reducer, initialState);
 
   const [dataCreate, datadispatCreate] = useReducer(reducer, initialState);
-  const data3 = () => {
-    console.log(singledata.projectdetail);
-  };
 
-  console.log(data3());
   const state = {
     singledata,
     Singledatadispatch,

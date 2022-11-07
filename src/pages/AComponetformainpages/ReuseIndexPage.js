@@ -1,14 +1,6 @@
-import React, { useContext } from "react";
-import { EmpGlobalState } from "../../Globalsate/EmpGlobalState";
+import React from "react";
 import { NavLink } from "react-router-dom";
 const ReuseIndexPage = ({ children, LinkMenu }) => {
-  const { Singledatadispatch } = useContext(EmpGlobalState);
-  const clickHandler = (e) => {
-    e.preventDefault();
-    Singledatadispatch({
-      type: "normal",
-    });
-  };
   return (
     <React.Fragment>
       <div className="lg:hidden  w-full min-h-full">
@@ -27,12 +19,7 @@ const ReuseIndexPage = ({ children, LinkMenu }) => {
                     <div className="flex flex-row items-center justify-center  md:h-[40px] h-[40px] w-full space-x-4 md:space-x-12 md:text-3xl text-xl itmes-center ">
                       {LinkMenu?.map((item, index) => {
                         return (
-                          <NavLink
-                            to={item.path}
-                            key={index}
-                            className="link"
-                            onClick={(e) => clickHandler(e)}
-                          >
+                          <NavLink to={item.path} key={index} className="link">
                             <div
                               key={index}
                               className="w-[30px] h-[30px] md:max-w-[60px]  md:h-[40px] rounded-[4px] md:rounded-[6px] flex flex-row items-center justify-center grow hover:bg-sky-400 "
@@ -56,7 +43,7 @@ const ReuseIndexPage = ({ children, LinkMenu }) => {
       <div className="lg:flex   hidden  lg:flex-row  w-full">
         <div className="border  hidden lg:flex lg:h-full border-blue-300">
           {/*....leftSidebard....*/}
-          <div className="hover:drop-shadow-md drop-shadow-xl bg-indigo-800 max-h-full  min-h-[89vh] border-2 rounded-lg pt-[10px]">
+          <div className="hover:drop-shadow-md drop-shadow-xl bg-indigo-800 max-h-full  min-h-[94vh] border-2 rounded-lg pt-[10px]">
             <div className=" space-y-2  px-1 ">
               {LinkMenu?.map((item, index) => {
                 return (

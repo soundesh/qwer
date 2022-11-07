@@ -34,8 +34,6 @@ const EmpLeaveAdd = () => {
     const value1 = new Date(ApplyLeave.from.split("/").reverse().join("-"));
     const value2 = new Date(ApplyLeave.to.split("/").reverse().join("-"));
 
-    console.log(ApplyLeave.from.split("/").reverse().join("-"));
-
     if (value1 !== " " && value2 !== " ") {
       var diff = value2.getTime() - value1.getTime();
 

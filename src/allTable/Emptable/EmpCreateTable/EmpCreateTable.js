@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-
+import AssignTask from "./AssignTask";
 import CrudTable from "../../../assitComponet/table/CrudTable";
 import Crudfilter from "../../../assitComponet/table/CrudFilter/Crudfilter";
 import { EmpGlobalState } from "../../../Globalsate/EmpGlobalState";
@@ -28,6 +28,7 @@ const EmpCreateTable = ({ initialData, headerData }) => {
           dispatcheddata={datadispatCreate}
         />
         <CreateViewDetail headerData={headerData} />
+        <AssignTask />
       </div>
     </div>
   );
