@@ -153,6 +153,54 @@ const inititalState2 = [
   },
 ];
 
+const initialState = [
+  {
+    id: "126",
+    leaveimg: "",
+    leavedate: "23/05/22",
+    leavetype: "festival",
+    holiday: "deepavali",
+  },
+
+  {
+    id: "124",
+    leavedate: "2/01/22",
+    leavetype: "RH",
+    holiday: "sri krishnar jemaastamiv",
+  },
+  { id: "128", leavedate: "23/05/22", leavetype: "RH", holiday: "pongal" },
+
+  {
+    id: "126",
+    leaveimg: "",
+    leavedate: "23/05/22",
+    leavetype: "festival",
+    holiday: "deepavali",
+  },
+
+  {
+    id: "124",
+    leavedate: "2/01/22",
+    leavetype: "RH",
+    holiday: "sri krishnar jemaastamiv",
+  },
+  { id: "128", leavedate: "23/05/22", leavetype: "RH", holiday: "pongal" },
+  {
+    id: "126",
+    leaveimg: "",
+    leavedate: "23/05/22",
+    leavetype: "festival",
+    holiday: "deepavali",
+  },
+
+  {
+    id: "124",
+    leavedate: "2/01/22",
+    leavetype: "RH",
+    holiday: "sri krishnar jemaastamiv",
+  },
+  { id: "128", leavedate: "23/05/22", leavetype: "RH", holiday: "pongal" },
+];
 const leaveHeaderData = [
   "id",
   "user",
@@ -205,7 +253,44 @@ const EmpLeaveMain = () => {
           Iconcolor="text-gray-700"
         />
       </div>
-      <div className="flex justify-center">
+
+      <div className="  flex  overflow-auto  Scrollbarnone">
+        <div className=" flex items-center px-2 text-blue-400">
+          <i className="fa-solid fa-up-long lg:text-2xl font-bold"></i>
+          <h1>UpComing Leaves... </h1>
+        </div>
+        <div className="  lg:max-w-[1150px] md:min-w-full flex items-center px-2 text-blue-400">
+          <div className="flex flex-row ">
+            {initialState.map((item, index) => {
+              return (
+                <div
+                  key={index}
+                  className="container max-h-[70px]  min-h-[70px] container max-w-sm  m-auto flex flex-wrap flex-row md:flex-row items-center justify-start"
+                >
+                  <div className="w-full p-1 ">
+                    <div className="flex border min-w-[300px]  border-gray-300 flex-row lg:flex-row rounded overflow-hidden h-auto lg:min-h-16 border shadow shadow-lg">
+                      <img
+                        className="block h-auto w-full w-20 lg:w-16 flex-none bg-cover  "
+                        src="https://pbs.twimg.com/media/DrM0nIdU0AEhG5b.jpg"
+                        alt="img"
+                      />
+                      <div className="bg-white rounded-b grow lg:rounded-b-none lg:rounded-r p-1 flex flex-col justify-between leading-normal">
+                        <div className="text-black font-bold text-lg mb-2 leading-tight">
+                          <p>{item.holiday}</p>
+                          <p>
+                            <span>{item.leavedate} </span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+      <div className="flex justify-center ">
         <EmpLeaveTable
           initialData={inititalState2}
           headerData={leaveHeaderData}

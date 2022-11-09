@@ -1,20 +1,116 @@
-.centerflexrow{
+.centerflexrow {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
 
-.letterflow{
-  text-shadow: 2px 2px #FF0000;
+.letterflow {
+  text-shadow: 2px 2px #ff0000;
   background: yellow;
 }
 
-
-
-.positionrelative{
+.positionrelative {
   position: relative;
 }
-.positionabsolute{
-  position:absolute
+.positionabsolute {
+  position: absolute;
+}
+
+.Scrollbardesign::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.Scrollbardesign::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.Scrollbardesign::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 128);
+}
+
+/* Handle on hover */
+.Scrollbardesign::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 128);
+}
+
+.maxWIdth {
+  width: 100%;
+}
+
+.Scrollbardesign::-webkit-scrollbar {
+  width: 10px;
+  max-height: 10px;
+}
+
+/* Track */
+.Scrollbardesign::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.Scrollbardesign::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 128);
+}
+
+/* Handle on hover */
+.Scrollbardesign::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 128);
+}
+
+.ScrollbarY {
+  width: 100%;
+
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.ScrollbarY::-webkit-scrollbar {
+  width: 5px;
+  max-height: 10px;
+}
+
+.ScrollbarY::-webkit-scrollbar-track {
+  max-height: 10px;
+
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.ScrollbarY::-webkit-scrollbar-thumb {
+  width: 20px;
+  background-color: rgba(0, 0, 128);
+  outline: 2px solid rgb(221, 221, 221);
+}
+
+.ScrollbarY::-webkit-scrollbar:vertical {
+  display: none;
+}
+
+.Scrollbarnone {
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.Scrollbarnone::-webkit-scrollbar {
+  width: 5px;
+  max-height: 0px;
+}
+
+.Scrollbarnone::-webkit-scrollbar-track {
+  max-height: 10px;
+
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.Scrollbarnone::-webkit-scrollbar-thumb {
+  width: 20px;
+  background-color: rgba(0, 0, 128);
+  outline: 2px solid rgb(221, 221, 221);
+}
+
+.Scrollbarnone::-webkit-scrollbar:vertical {
+  display: none;
 }

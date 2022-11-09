@@ -1,27 +1,18 @@
 import React, { useContext, useState, useEffect } from "react";
-import SelectorFrom from "../../../assitComponet/SelectorFrom";
+import SelectorFrom from "../../../assitComponet/Input/SelectorFrom";
 import { EmpGlobalState } from "../../../Globalsate/EmpGlobalState";
+import Footerbtn from "../../../assitComponet/Viewdetail/Footerbtn";
 import { Paper } from "@mui/material";
-import ReuseButton from "../../../assitComponet/button/ReuseButton";
+
+import SingleDatasize from "../../../assitComponet/Viewdetail/SingleDatasize";
+import VIewdetailheader from "../../../assitComponet/Viewdetail/VIewdetailheader";
+import ReuseTextInput from "../../../assitComponet/Input/ReuseTextInput";
+import Reuseinput from "../../../assitComponet/Input/Reuseinput";
+import ReuseInputDate from "../../../assitComponet/Input/ReuseInputDate";
 const TaskVeiwDetail = ({ headerData }) => {
   const { singledata, Singledatadispatch } = useContext(EmpGlobalState);
 
-  const [updateTaskData, setUpdateTaskData] = useState({
-    id: "1233",
-    taskdate: "",
-    taskgiven: "",
-    taskassigned: "",
-    project: "",
-    task: "",
-    Approverremarks: "",
-    empremarks: "",
-    worked: "",
-    clocked: "",
-    utilised: "",
-    efficiency: "",
-    taskStatus: "",
-    approvedstatus: "",
-  });
+  const [updateTaskData, setUpdateTaskData] = useState();
   useEffect(() => {
     if (singledata.projectdetail !== {}) {
       setUpdateTaskData(singledata.projectdetail);
@@ -51,24 +42,10 @@ const TaskVeiwDetail = ({ headerData }) => {
       {singledata.showdetail ? (
         <Paper>
           <div className="p-4 border-2 border-gray-400 rounded-lg lg:mx-1 mx-1   lg:max-w-full md:max-w-full lg:min-w-[500px] max-w-[270px] justify-center lg:my-2">
-            <Paper elevation={1}>
-              <div className="headerfont bg-indigo-700 text-white flex justify-between  lg:py-2 lg:pl-2 lg:text-xl md:text-xl text-xl ">
-                <div>
-                  <h1>Project Detail</h1>
-                </div>
-                <div
-                  onClick={() => {
-                    Singledatadispatch({
-                      type: "normal",
-                    });
-                  }}
-                >
-                  <h1 className="font-bold text-2xl text-white pr-5 hover:text-3xl">
-                    X
-                  </h1>
-                </div>
-              </div>
-            </Paper>
+            <VIewdetailheader
+              title="Project Detail"
+              Singledatadispatch={Singledatadispatch}
+            />
             <form
               onSubmit={ontaskUpdateSubmit}
               className="flex flex-col items-center justify-center"
@@ -116,37 +93,20 @@ const TaskVeiwDetail = ({ headerData }) => {
                         ) : (
                           <div
                             key={Object.keys(singledata.projectdetail)[index]}
-                            className="max-w-[140px] p-1   m-1  mr-4 "
+                            className=" p-1   m-1  mr-4 "
                           >
-                            <label
-                              htmlFor={
-                                Object.keys(singledata.projectdetail)[index]
-                              }
-                              className="text-blue-400  text-base uppercase"
-                            >
-                              {headerData[index]}
-                            </label>
-
-                            <input
-                              id={Object.keys(singledata.projectdetail)[index]}
-                              type="date"
-                              defaultValue={Object.values(
-                                singledata.projectdetail
-                              )
-                                [index].split("/")
-                                .reverse()
-                                .join("-")}
+                            <ReuseInputDate
+                              labelname="Date"
                               name={
                                 Object.keys(singledata.projectdetail)[index]
                               }
-                              placeholder={
-                                Object.keys(singledata.projectdetail)[index]
+                              defaultValue={
+                                Object.values(singledata.projectdetail)[index]
                               }
-                              size="4"
-                              onChange={(e) => {
-                                onChangeUpdate(e);
-                              }}
-                              className=" outline-none border-indigo-800 rounded-md border-2 min-w-[150px] md:min-w-[200px] lg:min-w-[140px] p-2"
+                              setTrigger={setUpdateTaskData}
+                              Trigger={updateTaskData}
+                              Triggername="taskdate"
+                              inputdesign={"border-indigo-800 max-w-[140px]"}
                             />
                           </div>
                         )}
@@ -154,17 +114,11 @@ const TaskVeiwDetail = ({ headerData }) => {
                     );
                   }
                   return (
-                    <div
-                      key={index}
-                      className="min-w-[140px] p-1   max-w-[280px] m-1 max-h-[50pxpx] "
-                    >
-                      <div className="text-blue-400  text-base uppercase ">
-                        {headerData[index]}
-                      </div>
-                      <div className="ml-4 text-gray-500    text-sm ">
-                        {Object.values(singledata.projectdetail)[index]}
-                      </div>
-                    </div>
+                    <SingleDatasize
+                      index={index}
+                      headerData={headerData}
+                      singledata={singledata}
+                    />
                   );
                 })}
               </div>
@@ -192,17 +146,11 @@ const TaskVeiwDetail = ({ headerData }) => {
                       index <= Object.keys(singledata.projectdetail).length
                     ) {
                       return (
-                        <div
-                          key={index}
-                          className="min-w-[150px] p-1  max-w-[280px] m-1 max-h-[50pxpx] "
-                        >
-                          <div className="text-blue-400  text-base uppercase ">
-                            {headerData[index]}
-                          </div>
-                          <div className="ml-4 text-gray-500    text-sm ">
-                            {Object.values(singledata.projectdetail)[index]}
-                          </div>
-                        </div>
+                        <SingleDatasize
+                          index={index}
+                          headerData={headerData}
+                          singledata={singledata}
+                        />
                       );
                     }
 
@@ -232,35 +180,22 @@ const TaskVeiwDetail = ({ headerData }) => {
 
                         if (index === 7) {
                           return (
-                            <div>
+                            <div key={index}>
                               <div key="empremarks">
-                                <div>
-                                  <label
-                                    htmlFor="empremarks"
-                                    className="text-blue-400  max-h-[50px] text-base uppercase "
-                                  >
-                                    Employee Remarks
-                                  </label>
-                                </div>
-
-                                <textarea
-                                  id="empremarks"
+                                <ReuseTextInput
                                   name="empremarks"
-                                  type="text"
                                   defaultValue={
                                     Object.values(singledata.projectdetail)[
                                       index
                                     ]
                                   }
+                                  onchanged={onChangeUpdate}
+                                  labelname="Employee remarks"
+                                  inputdesign=" border-indigo-800 "
+                                  maxLength="70"
                                   rows="2"
                                   cols="30"
-                                  placeholder="employee remarks about project task"
-                                  onChange={(e) => {
-                                    onChangeUpdate(e);
-                                  }}
-                                  className="resize-none border-indigo-800 rounded-md border-2 max-w-[200px] lg:min-w-[200px] md:min-w-[200px]"
-                                  maxLength="70"
-                                ></textarea>
+                                />
                               </div>
                             </div>
                           );
@@ -274,7 +209,7 @@ const TaskVeiwDetail = ({ headerData }) => {
                                 defaultValue={
                                   singledata.projectdetail.taskStatus
                                 }
-                                labeldesign="text-blue-400  text-base uppercase"
+                                labeldesign="text-blue-400 max-w-[150px]  text-base uppercase"
                                 OptionData={["Select", "complete", "pending"]}
                                 sizewidth="1"
                                 setTrigger={setUpdateTaskData}
@@ -286,56 +221,31 @@ const TaskVeiwDetail = ({ headerData }) => {
                         }
 
                         if (index > 7 && index < 11) {
-                          return (
-                            <div
-                              key={Object.keys(singledata.projectdetail)[index]}
-                              className="max-w-[140px] p-1   m-1  "
-                            >
-                              <label
-                                htmlFor={
-                                  Object.keys(singledata.projectdetail)[index]
-                                }
-                                className="text-blue-400  text-base uppercase"
-                              >
-                                {headerData[index]}
-                              </label>
+                          const data = Object.keys(singledata.projectdetail)[
+                            index
+                          ];
 
-                              <input
-                                id={
-                                  Object.keys(singledata.projectdetail)[index]
-                                }
-                                type="text"
+                          return (
+                            <div key={data} className=" p-1   m-1  ">
+                              <Reuseinput
+                                name={data}
                                 defaultValue={
                                   Object.values(singledata.projectdetail)[index]
                                 }
-                                name={
-                                  Object.keys(singledata.projectdetail)[index]
-                                }
-                                placeholder={
-                                  Object.keys(singledata.projectdetail)[index]
-                                }
-                                size="4"
-                                onChange={(e) => {
-                                  onChangeUpdate(e);
-                                }}
-                                className="resize-none border-indigo-800 rounded-md border-2 min-w-[200px] md:min-w-[200px] lg:min-w-[140px] p-2"
+                                onchanged={onChangeUpdate}
+                                labelname={data}
+                                inputdesign="max-w-[140px] border-indigo-800 "
                               />
                             </div>
                           );
                         }
                         if (index === 13 || index === 11) {
                           return (
-                            <div
-                              key={index}
-                              className="min-w-[150px] p-1  max-w-[280px] m-1 max-h-[50pxpx] "
-                            >
-                              <div className="text-blue-400  text-base uppercase ">
-                                {headerData[index]}
-                              </div>
-                              <div className="ml-4 text-gray-500    text-sm ">
-                                {Object.values(singledata.projectdetail)[index]}
-                              </div>
-                            </div>
+                            <SingleDatasize
+                              index={index}
+                              headerData={headerData}
+                              singledata={singledata}
+                            />
                           );
                         }
 
@@ -346,53 +256,10 @@ const TaskVeiwDetail = ({ headerData }) => {
                 </div>
               )}
               <div>
-                {singledata.editdetail ? (
-                  <div className="max-h-[40px] w-full  flex flex-row items-center justify-center">
-                    <ReuseButton
-                      btncolor="blue"
-                      onClick={() => {
-                        Singledatadispatch({
-                          type: "view",
-                          value: singledata.projectdetail,
-                        });
-                      }}
-                      btntype="button"
-                      btnname="view"
-                    />
-
-                    <ReuseButton
-                      btncolor="blue"
-                      onclicked={() => {
-                        Singledatadispatch({
-                          type: "edit",
-                          value: singledata.projectdetail,
-                        });
-                      }}
-                      btntype="button"
-                      btnname="edit"
-                    />
-
-                    <ReuseButton
-                      btncolor="red"
-                      onclicked={() => {
-                        Singledatadispatch({
-                          type: "delete",
-                          value: singledata.projectdetail,
-                        });
-                      }}
-                      btntype="button"
-                      btnname="delete"
-                    />
-                  </div>
-                ) : (
-                  <div className="flex flex-row justisy-center">
-                    <ReuseButton
-                      btncolor="blue"
-                      btntype="submit"
-                      btnname="submit"
-                    />
-                  </div>
-                )}
+                <Footerbtn
+                  singledata={singledata}
+                  Singledatadispatch={Singledatadispatch}
+                />
               </div>
             </form>
           </div>
@@ -401,5 +268,4 @@ const TaskVeiwDetail = ({ headerData }) => {
     </div>
   );
 };
-
 export default TaskVeiwDetail;

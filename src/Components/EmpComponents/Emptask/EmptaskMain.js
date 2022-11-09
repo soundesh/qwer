@@ -183,6 +183,7 @@ const headerstate = [
   "Status",
   "Approved",
 ];
+
 const EmptaskMain = () => {
   const [allData] = useState(inititalState1);
   const datasetup = useCallback(() => {
@@ -264,7 +265,7 @@ const EmptaskMain = () => {
   }, []);
   useEffect(() => {}, [datasetup]);
   return (
-    <div className=" min-w-full flex-grow  ">
+    <div className=" min-w-full  ">
       <div className="flex flexcolumncontainer flex-row min-h-[50px] max-h-[50px] bg-gray-50 md:space-x-8 lg:space-x-8 space-x-7 flex-wrap items-center justify-center">
         <IconBage
           IconName="New Task"
@@ -288,6 +289,7 @@ const EmptaskMain = () => {
           );
         })}
       </div>
+
       <div className="flex justify-center">
         <EmpTasktable
           initialData={datasetup().initialaData}

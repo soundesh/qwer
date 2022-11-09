@@ -6,27 +6,28 @@ const SelectorFrom = ({
   OptionData,
   setTrigger,
   Trigger,
-  Triggername,
+
   labeldesign,
   selectdesign,
   defaultValue,
   form,
+  name,
 }) => {
   return (
     <div className={`${selectdesign}`}>
       <div>
-        <label htmlFor={labeled} className={`${labeldesign}`}>
+        <label htmlFor={name} className={`${labeldesign}`}>
           {labeled}
         </label>
       </div>
       <select
-        name={labeled}
-        id={labeled}
+        name={name}
+        id={name}
         form={form}
         defaultValue={defaultValue}
-        className={`resize-none ${sizewidth} rounded-md border-2 max-w-[200px] lg:min-w-[200px] md:min-w-[200px]`}
+        className={`resize-none ${sizewidth} rounded-md border-2 w-[200px] lg:w-[200px] md:w-[200px]`}
         onChange={(e) => {
-          setTrigger({ ...Trigger, [Triggername]: e.target.value });
+          setTrigger({ ...Trigger, [name]: e.target.value });
         }}
       >
         {OptionData.map((item, index) => {

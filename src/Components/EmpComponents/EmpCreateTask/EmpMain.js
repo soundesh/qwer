@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect } from "react";
 import IconBage from "../../../assitComponet/IconBage/IconBage";
-import ProjectAssignDetail from "./ProjectAssignDetail";
+import ProjectAssignDetail from "../EmpProjectCreate/ProjectAssignDetail";
 import Paper from "material-ui/Paper";
 import EmpCreateTable from "../../../allTable/Emptable/EmpCreateTable/EmpCreateTable";
 const inititalState1 = [
@@ -187,7 +187,7 @@ const headerstate = [
 
 const EmpMain = () => {
   const [allData, setAllData] = useState(inititalState1);
-  const [showProject, setshowProject] = useState(true);
+
   const datasetup = useCallback(() => {
     const DataArray = [];
     const notifylength = [];
@@ -291,46 +291,12 @@ const EmpMain = () => {
           );
         })}
       </div>
-      <Paper elevation={2} className="mb-4">
-        <div className="flex item-center  min-h-[70px] ">
-          <nav>
-            <ul className="DESKTOP-MENU flex -mb-5 ">
-              <li>
-                <button
-                  onClick={() => {
-                    setshowProject(true);
-                  }}
-                  className=" btnFocus focus:bg-gray-200 py-2 px-3 border-b-4 border-gray-400 min-w-[140px] focus:border-b-4  focus:border-b-blue-500 "
-                >
-                  Home
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => {
-                    setshowProject(false);
-                  }}
-                  className=" btnFocus focus:bg-gray-200 py-2 px-3 border-b-4 border-gray-400 min-w-[140px] focus:border-b-4  focus:border-b-blue-500 "
-                >
-                  Project
-                </button>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </Paper>
-      {showProject ? (
-        <div className="flex justify-center">
-          <EmpCreateTable
-            initialData={datasetup().initialaData}
-            headerData={headerstate}
-          />
-        </div>
-      ) : (
-        <div>
-          <ProjectAssignDetail />
-        </div>
-      )}
+      <div className="flex justify-center">
+        <EmpCreateTable
+          initialData={datasetup().initialaData}
+          headerData={headerstate}
+        />
+      </div>
     </div>
   );
 };

@@ -1,20 +1,20 @@
-import React from 'react'
+import React from "react";
 
-import Empnav from '../../ANavbar/Empnav'
-import EmptaskMain from './EmptaskMain'
+import Empnav from "../../ANavbar/Empnav";
+import EmptaskMain from "./EmptaskMain";
 const EmpTask = () => {
   return (
-    <div className='min-w-full'>
-    <div>
-      <Empnav title="task"/>
-    </div>
-    <div className='min-w-full'>
+    <div className="min-w-full">
       <div>
-        <EmptaskMain/>
+        <Empnav title="Dashboard" />
+      </div>
+      <div className="min-w-full">
+        <div>
+          <EmptaskMain />
+        </div>
       </div>
     </div>
-  </div>
-  )
-}
+  );
+};
 
-export default EmpTask
+export default EmpTask;

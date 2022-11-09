@@ -3,10 +3,10 @@ import { NavLink } from "react-router-dom";
 const ReuseIndexPage = ({ children, LinkMenu }) => {
   return (
     <React.Fragment>
-      <div className="lg:hidden  w-full min-h-full">
+      <div className="lg:hidden   min-h-full">
         <div className="grow  border  border-blue-300">
           {/*....main*/}
-          <div className="z-10">
+          <div className="z-10   max-w-[600px]">
             {children}
             <div>
               <div className="fixed lg:hidden bottom-0 left-0 min-w-full max-w-full w-full ">
@@ -40,7 +40,7 @@ const ReuseIndexPage = ({ children, LinkMenu }) => {
         </div>
       </div>
 
-      <div className="lg:flex   hidden  lg:flex-row  w-full">
+      <div className="lg:flex max-w-[100%]   hidden  lg:flex-row  w-full">
         <div className="border  hidden lg:flex lg:h-full border-blue-300">
           {/*....leftSidebard....*/}
           <div className="hover:drop-shadow-md drop-shadow-xl bg-indigo-800 max-h-full  min-h-[94vh] border-2 rounded-lg pt-[10px]">
@@ -69,7 +69,7 @@ const ReuseIndexPage = ({ children, LinkMenu }) => {
 
         {/*....main*/}
         <div className="border border-blue-300 grow">
-          <div className="z-10">
+          <div className="z-10 ">
             {children}
             <div>
               <div className="fixed lg:hidden bottom-0 left-0 min-w-full  ">

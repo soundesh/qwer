@@ -1,28 +1,19 @@
 import React, { useContext, useState, useEffect } from "react";
 import { EmpGlobalState } from "../../../Globalsate/EmpGlobalState";
+import Footerbtn from "../../../assitComponet/Viewdetail/Footerbtn";
 import { Paper } from "@mui/material";
 import SelectorFrom from "../../../assitComponet/SelectorFrom";
-import ReuseButton from "../../../assitComponet/button/ReuseButton";
+import VIewdetailheader from "../../../assitComponet/Viewdetail/VIewdetailheader";
+
+import ReuseTextInput from "../../../assitComponet/Input/ReuseTextInput";
+import Reuseinput from "../../../assitComponet/Input/Reuseinput";
+import SingleDatasize from "../../../assitComponet/Viewdetail/SingleDatasize";
+
+import ReuseInputDate from "../../../assitComponet/Input/ReuseInputDate";
 const EmpLeaveVIewDetail = ({ headerData }) => {
   const { dataleave, datadispatchleave } = useContext(EmpGlobalState);
 
-  const [updateTaskData, setUpdateTaskData] = useState({
-    id: "23546432",
-    user: "",
-    empId: "",
-
-    date: "",
-    from: "",
-    to: "",
-    lop: "",
-    Days: "",
-    leaveType: "",
-    reason: "",
-    reasonleave: "",
-    L1aproverandremarks: "",
-    L2aproverandremarks: "",
-    L3aproverandreamarks: "",
-  });
+  const [updateTaskData, setUpdateTaskData] = useState();
   useEffect(() => {
     if (dataleave.projectdetail !== {}) {
       setUpdateTaskData(dataleave.projectdetail);
@@ -39,127 +30,79 @@ const EmpLeaveVIewDetail = ({ headerData }) => {
   const ontaskUpdateSubmit = async (e) => {
     console.log("emp task update ", updateTaskData);
     e.preventDefault();
+    datadispatchleave({
+      type: "normal",
+    });
   };
 
+  const Datakey = Object.keys(dataleave.projectdetail);
+  const Datavalue = Object.values(dataleave.projectdetail);
   return (
     <div>
       {dataleave.showdetail ? (
         <Paper className="flex flex-col items-center justify-center">
-          <div className="lg:mx-1 mx-1  lg:max-w-full md:max-w-full lg:min-w-[500px] min-w-[280px] justify-center lg:my-2">
-            <div className="headerfont bg-indigo-700 text-white flex justify-between  lg:py-2 lg:pl-2 lg:text-xl md:text-xl text-xl ">
-              <div>
-                <h1>Leave Detail</h1>
-              </div>
-              <div
-                onClick={() => {
-                  datadispatchleave({
-                    type: "normal",
-                    value: dataleave.projectdetail,
-                  });
-                }}
-              >
-                <h1 className="font-bold text-2xl text-white pr-5 hover:text-3xl">
-                  X
-                </h1>
-              </div>
-            </div>
+          <div className="lg:mx-1 mx-1  lg:max-w-full md:max-w-full lg:min-w-[500px]  min-w-[280px] justify-center lg:my-2">
+            <VIewdetailheader
+              title="Leave Detail"
+              Singledatadispatch={datadispatchleave}
+            />
             <form
               onSubmit={ontaskUpdateSubmit}
               className="flex flex-col items-center justify-center"
             >
               {dataleave.editdetail ? (
                 <div className="lg:flex md:flex md:flex-wrap md:pt-1 lg:flex-wrap lg:pt-1  rounded-[4px] lg:mx-2">
-                  {Object.keys(dataleave.projectdetail).map((item, index) => {
-                    if (Object.keys(dataleave.projectdetail)[0] === item) {
+                  {Datakey.map((item, index) => {
+                    if (Datakey[0] === item) {
                       return <React.Fragment key={index}></React.Fragment>;
                     }
                     return (
-                      <div
-                        key={index}
-                        className="min-w-[150px] p-1  max-w-[280px] m-1 max-h-[50pxpx] "
-                      >
-                        <div className="text-blue-400  text-base uppercase ">
-                          {headerData[index]}
-                        </div>
-                        <div className="ml-4 text-gray-500    text-sm ">
-                          {Object.values(dataleave.projectdetail)[index]}
-                        </div>
-                      </div>
+                      <SingleDatasize
+                        index={index}
+                        headerData={headerData}
+                        singledata={dataleave}
+                      />
                     );
                   })}
                 </div>
               ) : (
                 <div className="lg:flex md:flex md:flex-wrap md:pt-1 lg:flex-wrap lg:pt-1 ">
-                  {Object.keys(dataleave.projectdetail).map((item, index) => {
+                  {Datakey.map((item, index) => {
                     if (index >= 11) {
                       return (
-                        <div
-                          key={index}
-                          className="min-w-[150px] p-1  max-w-[280px] m-1 max-h-[50pxpx] "
-                        >
-                          <div className="text-blue-400  text-base uppercase ">
-                            {headerData[index]}
-                          </div>
-                          <div className="ml-4 text-gray-500    text-sm ">
-                            {Object.values(dataleave.projectdetail)[index]}
-                          </div>
-                        </div>
+                        <SingleDatasize
+                          index={index}
+                          headerData={headerData}
+                          singledata={dataleave}
+                        />
                       );
                     }
 
-                    if (Object.keys(dataleave.projectdetail)[0] === item) {
+                    if (Datakey[0] === item) {
                       return <React.Fragment key={index}></React.Fragment>;
                     }
 
                     if (index <= 3) {
                       return (
-                        <div
-                          key={index}
-                          className="min-w-[150px] p-1  max-w-[280px] m-1 max-h-[50pxpx] "
-                        >
-                          <div className="text-blue-400  text-base uppercase ">
-                            {headerData[index]}
-                          </div>
-                          <div className="ml-4 text-gray-500    text-sm ">
-                            {Object.values(dataleave.projectdetail)[index]}
-                          </div>
-                        </div>
+                        <SingleDatasize
+                          index={index}
+                          headerData={headerData}
+                          singledata={dataleave}
+                        />
                       );
                     }
 
                     if (index >= 4 && index <= 5) {
                       return (
-                        <div
-                          key={Object.keys(dataleave.projectdetail)[index]}
-                          className="max-w-[140px] p-1   m-1  mr-4 "
-                        >
-                          <label
-                            htmlFor={
-                              Object.keys(dataleave.projectdetail)[index]
-                            }
-                            className="text-blue-400  text-base uppercase"
-                          >
-                            {headerData[index]}
-                          </label>
-
-                          <input
-                            id={Object.keys(dataleave.projectdetail)[index]}
-                            type="date"
-                            defaultValue={Object.keys(dataleave.projectdetail)
-                              [index].split("/")
-                              .reverse()
-                              .join("-")}
-                            name={Object.keys(dataleave.projectdetail)[index]}
-                            placeholder={
-                              Object.keys(dataleave.projectdetail)[index]
-                            }
-                            size="4"
-                            onChange={(e) => {
-                              onChangeUpdate(e);
-                            }}
-                            className=" outline-none border-indigo-800 rounded-md border-2 min-w-[150px] md:min-w-[200px] lg:min-w-[140px] p-2"
-                          />
-                        </div>
+                        <ReuseInputDate
+                          labelname="Date"
+                          name={Datakey[index]}
+                          defaultValue={Datavalue[index]}
+                          setTrigger={setUpdateTaskData}
+                          Trigger={updateTaskData}
+                          Triggername="taskdate"
+                          inputdesign={"border-indigo-800 max-w-[140px]"}
+                        />
                       );
                     }
 
@@ -188,32 +131,13 @@ const EmpLeaveVIewDetail = ({ headerData }) => {
 
                     if (index === 9) {
                       return (
-                        <div
-                          key={Object.keys(dataleave.projectdetail)[index]}
-                          className="max-w-[140px] p-1 m-1"
-                        >
-                          <label
-                            htmlFor={
-                              Object.keys(dataleave.projectdetail)[index]
-                            }
-                            className="text-blue-400  text-base uppercase"
-                          >
-                            {headerData[index]}
-                          </label>
-
-                          <input
-                            id={Object.keys(dataleave.projectdetail)[index]}
-                            type="text"
-                            defaultValue={updateTaskData.reason}
-                            name={Object.keys(dataleave.projectdetail)[index]}
-                            placeholder={
-                              Object.keys(dataleave.projectdetail)[index]
-                            }
-                            size="4"
-                            onChange={(e) => {
-                              onChangeUpdate(e);
-                            }}
-                            className="resize-none border-indigo-800 rounded-md border-2 min-w-[200px] md:min-w-[200px] lg:min-w-[140px] p-2"
+                        <div key={index} className="max-w-[140px] p-1 m-1">
+                          <Reuseinput
+                            name={Datakey[index]}
+                            defaultValue={Datavalue[index]}
+                            onchanged={onChangeUpdate}
+                            labelname={Datakey[index]}
+                            inputdesign="max-w-[140px] border-indigo-800 "
                           />
                         </div>
                       );
@@ -221,99 +145,34 @@ const EmpLeaveVIewDetail = ({ headerData }) => {
                     if (index === 10) {
                       return (
                         <div key="reasonleave">
-                          <div>
-                            <label
-                              htmlFor="reasonleave"
-                              className="text-blue-400  max-h-[50px] text-base uppercase "
-                            >
-                              reason leave
-                            </label>
-                          </div>
-
-                          <textarea
-                            id="reasonleave"
+                          <ReuseTextInput
                             name="reasonleave"
-                            defaultValue={updateTaskData.reasonleave}
-                            type="text"
+                            defaultValue={Datavalue[index]}
+                            onchanged={onChangeUpdate}
+                            labelname="Reason leave"
+                            inputdesign=" border-indigo-800 "
+                            maxLength="70"
                             rows="2"
                             cols="30"
-                            placeholder=" reason for leave"
-                            onChange={(e) => {
-                              onChangeUpdate(e);
-                            }}
-                            className="resize-none border-indigo-800 rounded-md border-2 max-w-[200px] lg:min-w-[200px] md:min-w-[200px]"
-                            maxLength="70"
-                          ></textarea>
+                          />
                         </div>
                       );
                     }
 
                     return (
-                      <div
-                        key={index}
-                        className="min-w-[150px] p-1  max-w-[280px] m-1 max-h-[50pxpx] "
-                      >
-                        <div className="text-blue-400  text-base uppercase ">
-                          {headerData[index]}
-                        </div>
-                        <div className="ml-4 text-gray-500    text-sm ">
-                          {Object.values(dataleave.projectdetail)[index]}
-                        </div>
-                      </div>
+                      <SingleDatasize
+                        index={index}
+                        headerData={headerData}
+                        singledata={dataleave}
+                      />
                     );
                   })}
                 </div>
               )}
-
-              <div>
-                {dataleave.editdetail ? (
-                  <div className="max-h-[40px] w-full  flex flex-row items-center justify-center">
-                    <ReuseButton
-                      btncolor="blue"
-                      onClick={() => {
-                        datadispatchleave({
-                          type: "view",
-                          value: dataleave.projectdetail,
-                        });
-                      }}
-                      btntype="button"
-                      btnname="view"
-                    />
-
-                    <ReuseButton
-                      btncolor="blue"
-                      onclicked={() => {
-                        datadispatchleave({
-                          type: "edit",
-                          value: dataleave.projectdetail,
-                        });
-                      }}
-                      btntype="button"
-                      btnname="edit"
-                    />
-
-                    <ReuseButton
-                      btncolor="red"
-                      onclicked={() => {
-                        datadispatchleave({
-                          type: "delete",
-                          value: dataleave.projectdetail,
-                        });
-                      }}
-                      btntype="button"
-                      btnname="delete"
-                    />
-                  </div>
-                ) : (
-                  <div className="flex flex-row justisy-center">
-                    <ReuseButton
-                      btncolor="blue"
-                      btntype="submit"
-                      btnname="submit"
-                    />
-                  </div>
-                )}
-              </div>
+              <Footerbtn
+                singledata={dataleave}
+                Singledatadispatch={datadispatchleave}
+              />
             </form>
           </div>
         </Paper>

@@ -4,7 +4,7 @@ import EmpMain from "./EmpMain";
 const EmpCreateTask = () => {
   return (
     <div>
-      <Empnav title="Assign Task" />
+      <Empnav title="Task Details" />
 
       <EmpMain />
     </div>

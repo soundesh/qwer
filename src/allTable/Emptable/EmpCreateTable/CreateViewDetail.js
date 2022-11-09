@@ -1,7 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { EmpGlobalState } from "../../../Globalsate/EmpGlobalState";
+import Footerbtn from "../../../assitComponet/Viewdetail/Footerbtn";
 import SelectorFrom from "../../../assitComponet/SelectorFrom";
-import ReuseButton from "../../../assitComponet/button/ReuseButton";
+import VIewdetailheader from "../../../assitComponet/Viewdetail/VIewdetailheader";
+
+import SingleDatasize from "../../../assitComponet/Viewdetail/SingleDatasize";
 import { Paper } from "@mui/material";
 const CreateViewDetail = ({ headerData }) => {
   const { dataCreate, datadispatCreate } = useContext(EmpGlobalState);
@@ -39,7 +42,7 @@ const CreateViewDetail = ({ headerData }) => {
 
     e.preventDefault();
 
-    setUpdateTaskData({
+    datadispatCreate({
       type: "normal",
     });
     console.log("emp task update ", updateTaskData);
@@ -50,22 +53,10 @@ const CreateViewDetail = ({ headerData }) => {
       {dataCreate.showdetail ? (
         <Paper>
           <div className="p-4 border-2 border-gray-400 rounded-lg lg:mx-1 mx-1   lg:max-w-full md:max-w-full lg:min-w-[500px] max-w-[270px] justify-center lg:my-2">
-            <div className="headerfont bg-indigo-700 text-white flex justify-between  lg:py-2 lg:pl-2 lg:text-xl md:text-xl text-xl ">
-              <div>
-                <h1>Assign Task</h1>
-              </div>
-              <div
-                onClick={() => {
-                  datadispatCreate({
-                    type: "normal",
-                  });
-                }}
-              >
-                <h1 className="font-bold text-2xl text-white pr-5 hover:text-3xl">
-                  X
-                </h1>
-              </div>
-            </div>
+            <VIewdetailheader
+              title="Assign Task"
+              Singledatadispatch={datadispatCreate}
+            />
 
             <form
               onSubmit={ontaskUpdateSubmit}
@@ -190,17 +181,11 @@ const CreateViewDetail = ({ headerData }) => {
                       index <= Object.keys(dataCreate.projectdetail).length
                     ) {
                       return (
-                        <div
-                          key={index}
-                          className="min-w-[150px] p-1  max-w-[280px] m-1 max-h-[50pxpx] "
-                        >
-                          <div className="text-blue-400  text-base uppercase ">
-                            {headerData[index]}
-                          </div>
-                          <div className="ml-4 text-gray-500    text-sm ">
-                            {Object.values(dataCreate.projectdetail)[index]}
-                          </div>
-                        </div>
+                        <SingleDatasize
+                          index={index}
+                          headerData={headerData}
+                          singledata={dataCreate}
+                        />
                       );
                     }
 
@@ -285,17 +270,11 @@ const CreateViewDetail = ({ headerData }) => {
 
                         if (index >= 10) {
                           return (
-                            <div
-                              key={index}
-                              className="min-w-[150px] p-1  max-w-[280px] m-1 max-h-[50pxpx] "
-                            >
-                              <div className="text-blue-400  text-base uppercase ">
-                                {headerData[index]}
-                              </div>
-                              <div className="ml-4 text-gray-500    text-sm ">
-                                {Object.values(dataCreate.projectdetail)[index]}
-                              </div>
-                            </div>
+                            <SingleDatasize
+                              index={index}
+                              headerData={headerData}
+                              singledata={dataCreate}
+                            />
                           );
                         }
                         return <React.Fragment key={index}></React.Fragment>;
@@ -305,53 +284,10 @@ const CreateViewDetail = ({ headerData }) => {
                 </div>
               )}
               <div>
-                {dataCreate.editdetail ? (
-                  <div className="max-h-[40px] w-full  flex flex-row items-center justify-center">
-                    <ReuseButton
-                      btncolor="blue"
-                      onClick={() => {
-                        datadispatCreate({
-                          type: "view",
-                          value: dataCreate.projectdetail,
-                        });
-                      }}
-                      btntype="button"
-                      btnname="view"
-                    />
-
-                    <ReuseButton
-                      btncolor="blue"
-                      onclicked={() => {
-                        datadispatCreate({
-                          type: "edit",
-                          value: dataCreate.projectdetail,
-                        });
-                      }}
-                      btntype="button"
-                      btnname="edit"
-                    />
-
-                    <ReuseButton
-                      btncolor="red"
-                      onclicked={() => {
-                        datadispatCreate({
-                          type: "delete",
-                          value: dataCreate.projectdetail,
-                        });
-                      }}
-                      btntype="button"
-                      btnname="delete"
-                    />
-                  </div>
-                ) : (
-                  <div className="flex flex-row justisy-center">
-                    <ReuseButton
-                      btncolor="blue"
-                      btntype="submit"
-                      btnname="submit"
-                    />
-                  </div>
-                )}
+                <Footerbtn
+                  singledata={dataCreate}
+                  Singledatadispatch={datadispatCreate}
+                />
               </div>
             </form>
           </div>

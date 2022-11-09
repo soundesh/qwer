@@ -5,12 +5,12 @@ export const EmployeeLinks = [
     icon: <i className="material-icons">dashboard</i>,
   },
 
-  {
-    path: "/emptask1",
-    name: "task",
-    icon: <i className="fa fa-briefcase"></i>,
-    list: {},
-  },
+  // {
+  //   path: "/emptask1",
+  //   name: "work task",
+  //   icon: <i className="fa fa-briefcase"></i>,
+  //   list: {},
+  // },
 
   {
     path: "/empleave",
@@ -20,12 +20,18 @@ export const EmployeeLinks = [
   },
   {
     path: "/empcreatetask",
-    name: "Create task",
+    name: "team task",
     icon: <i className="fa-regular fa-clipboard"></i>,
+  },
+
+  {
+    path: "/empassign",
+    name: "Assign",
+    icon: <i className="fa-solid fa-rotate"></i>,
   },
   {
     path: "/empholiday",
-    name: "Holiday",
+    name: "General",
     icon: <i className="fa-solid fa-mug-hot"></i>,
   },
 ];

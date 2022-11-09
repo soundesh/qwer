@@ -16,7 +16,7 @@ const EmpLeaveTable = ({ initialData, headerData }) => {
           headerData={headerData}
           CheckDeletecolor="pink"
           title="Leave Status"
-          Design="bg-white text-xs   grow lg:ml-2 min-h-full overflow-auto"
+          Design="bg-white text-xs mb-2  grow lg:ml-2 min-h-full overflow-auto"
           tableheight="max-h-[52vh] "
           tableDesign="min-w-[3000px]"
           FiliterComponent={Crudfilter}
