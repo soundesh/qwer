@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useCallback } from "react";
 import CrudTable from "../../../assitComponet/table/CrudTable";
 
 import { EmpGlobalState } from "../../../Globalsate/EmpGlobalState";
@@ -19,8 +19,10 @@ const EmpTasktable = ({ initialData, headerData }) => {
           title="Task Information"
           Design="bg-white text-xs   grow lg:ml-2 min-h-full overflow-auto"
           tableheight="max-h-[50vh] "
-          tableDesign="min-w-[3000px]"
-          FiliterComponent={Crudfilter}
+          tableDesign="min-w-[1700px] w-full"
+          FiliterComponent={useCallback(() => {
+            return Crudfilter;
+          }, [])}
           Adding={true}
           editing={true}
           editbtnview={true}

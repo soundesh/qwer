@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Tooltip } from "@mui/material";
+
 import CheckBoxdesign from "./Checkbox/CheckBoxdesign";
 import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
@@ -24,19 +25,16 @@ const CrudTable = ({
   fontcheckbtnonly,
   dispatcheddata,
 }) => {
-  const [fronthidden, setFronthidden] = useState(fontbtnview);
-  const [backhidden, setbackhidden] = useState(backbtnview);
+  const [fronthidden] = useState(fontbtnview);
+  const [backhidden] = useState(backbtnview);
   const [show, setShow] = useState(false);
   const [allData, setAllData] = useState(initialData);
   const [filteredData, setFilteredData] = useState(allData);
   //adding
   const [addState, setAddState] = useState(Adding);
-  const [add, setAdd] = useState(false);
   // edit
   const [editState, setEditState] = useState(editing);
   const [edit, setEdit] = useState(true);
-  const [editItem, setEditItem] = useState();
-  const [EditData, setEditData] = useState();
   const [editHidden, setEditHidden] = useState(editbtnview);
 
   //delete
@@ -71,10 +69,14 @@ const CrudTable = ({
   const onhandleDelete = (deleteItem) => {
     if (window.confirm("please conform to delete")) {
       const data = allData.filter((item) => {
-        return Object.values(item)[0] !== Object.values(deleteItem)[0];
+        return Object.values(item)[0] !== deleteItem;
       });
-      setAllData(data);
-      setFilteredData(data);
+      setAllData((previous) => {
+        previous = data;
+      });
+      setFilteredData((previous) => {
+        previous = data;
+      });
       console.log("You pressed OK!");
     }
   };
@@ -103,9 +105,25 @@ const CrudTable = ({
     setSelectedNotEmpty(false);
   };
 
-  const OnhandleEdit = (item) => {
-    setEditData([item]);
-    setEdit(!edit);
+  const OnhandleEdit = (itemData) => {
+    const result = allData.filter((item) => {
+      return Object.values(item)[0] === itemData;
+    });
+    dispatcheddata({
+      type: "edit",
+      value: result,
+      showdetail: true,
+    });
+  };
+  const OnhandleView = (itemData) => {
+    const result = allData.filter((item) => {
+      return Object.values(item)[0] === itemData;
+    });
+    dispatcheddata({
+      type: "view",
+      value: result,
+      showdetail: true,
+    });
   };
 
   const onSelectedAllCheck = (e) => {
@@ -126,16 +144,8 @@ const CrudTable = ({
       }
       const { value } = e.target;
       const result = allData.filter((item) => {
-        const data = () => {
-          for (const user in item) {
-            if (item[user].includes(value)) {
-              return item;
-            }
-          }
-        };
-        return data();
+        return Object.values(item)[0] === value;
       });
-
       setSelectedCheckbox([...selectedCheckbox, ...result]);
     } else {
       const { value } = e.target;
@@ -144,7 +154,18 @@ const CrudTable = ({
       );
     }
   };
-
+  useEffect(() => {
+    dispatcheddata({
+      type: "edit",
+      value: [allData[0]],
+      showdetail: false,
+    });
+    dispatcheddata({
+      type: "view",
+      value: [allData[0]],
+      showdetail: false,
+    });
+  }, [dispatcheddata, allData]);
   useEffect(() => {
     if (selectedCheckbox.length !== 0) {
       setSelectedNotEmpty(true);
@@ -271,8 +292,8 @@ const CrudTable = ({
       <div
         className={
           show
-            ? `py-3 lg:px-4 text-xs md:text-base lg:text-lg Scrollbardesign overflow-auto `
-            : `py-3 lg:px-4 text-xs md:text-base lg:text-lg ${tableheight}  Scrollbardesign overflow-auto `
+            ? `py-3 lg:px-4 text-xs md:text-base lg:text-lg Scrollbardesign overflow-auto grow`
+            : `py-3 lg:px-4 text-xs md:text-base lg:text-lg ${tableheight} grow  Scrollbardesign overflow-auto `
         }
       >
         <table
@@ -295,7 +316,7 @@ const CrudTable = ({
                                   setchecktrigger={setchecktrue}
                                   checkedState={allCheck}
                                   ValueData={(e) => {
-                                    onSelectedAllCheck(e, item);
+                                    onSelectedAllCheck(e);
                                   }}
                                 />
                               </div>
@@ -381,7 +402,10 @@ const CrudTable = ({
                                       setchecktrigger={setchecktrue}
                                       checkedState={allCheck}
                                       ValueData={(e) => {
-                                        onselectcheck(e, item);
+                                        onselectcheck(
+                                          e,
+                                          Object.values(item)[0]
+                                        );
                                       }}
                                     />
                                   </div>
@@ -397,10 +421,9 @@ const CrudTable = ({
                                         <Tooltip
                                           title="edit"
                                           onClick={() => {
-                                            dispatcheddata({
-                                              type: "edit",
-                                              value: item,
-                                            });
+                                            OnhandleEdit(
+                                              Object.values(item)[0]
+                                            );
                                           }}
                                         >
                                           <IconButton
@@ -421,7 +444,11 @@ const CrudTable = ({
                                         <Tooltip
                                           title="Delete"
                                           className="border-0"
-                                          onClick={() => onhandleDelete(item)}
+                                          onClick={() =>
+                                            onhandleDelete(
+                                              Object.values(item)[0]
+                                            )
+                                          }
                                         >
                                           <IconButton>
                                             <i className="material-icons text-pink-600">
@@ -445,7 +472,7 @@ const CrudTable = ({
                         key={index}
                         title={`${Object.keys(item)[index]}`}
                         onClick={() => {
-                          dispatcheddata({ type: "view", value: item });
+                          OnhandleView(Object.values(item)[0]);
                         }}
                       >
                         <td>
@@ -462,7 +489,9 @@ const CrudTable = ({
                           <div>
                             <Tooltip
                               title="edit"
-                              onClick={() => OnhandleEdit(item)}
+                              onClick={() =>
+                                OnhandleEdit(Object.values(item)[0])
+                              }
                             >
                               <IconButton form="my_form1" type="submit">
                                 <i className="material-icons text-pink-600">
@@ -479,11 +508,13 @@ const CrudTable = ({
                             <Tooltip
                               title="Delete"
                               className="border-0"
-                              onClick={() => onhandleDelete(item)}
+                              onClick={() =>
+                                onhandleDelete(Object.values(item)[0])
+                              }
                             >
                               <IconButton>
                                 <i className="material-icons text-pink-600">
-                                  deleteoutline
+                                  delete
                                 </i>
                               </IconButton>
                             </Tooltip>

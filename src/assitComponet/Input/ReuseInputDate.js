@@ -22,15 +22,33 @@ const ReuseInputDate = ({
   //     Triggername="taskdate"
   //     inputdesign={"border-indigo-800 max-w-[140px]"}
   //   />
+
+  function today() {
+    let d = new Date();
+    let currDate = d.getDate();
+    let currMonth = d.getMonth() + 1;
+    let currYear = d.getFullYear();
+    return (
+      (currDate < 10 ? "0" + currDate : currDate) +
+      "/" +
+      (currMonth < 10 ? "0" + currMonth : currMonth) +
+      "/" +
+      currYear
+    );
+  }
+
   return (
-    <div className="flex flex-col mx-3">
+    <div className="flex flex-col ">
       <label htmlFor={name} className="text-blue-400  text-base uppercase">
         {labelname}
       </label>
       <input
         id={name}
         type="date"
-        defaultValue={defaultValue.split("/").reverse().join("-")}
+        defaultValue={
+          defaultValue.split("/").reverse().join("-") ||
+          today().split("/").reverse().join("-")
+        }
         name={name}
         size="4"
         onChange={(e) => {
@@ -39,7 +57,7 @@ const ReuseInputDate = ({
             [name]: moment(e.target.value).format("DD/MM/YYYY"),
           });
         }}
-        className={`resize-none ${inputdesign} rounded-md border-2 w-[200px] lg:w-[200px] md:w-[200px]`}
+        className={`resize-none ${inputdesign} m-1 rounded-md border-2 w-[200px] lg:w-[200px] md:w-[200px]`}
       />
     </div>
   );

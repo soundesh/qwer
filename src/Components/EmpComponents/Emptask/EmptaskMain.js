@@ -266,7 +266,7 @@ const EmptaskMain = () => {
   useEffect(() => {}, [datasetup]);
   return (
     <div className=" min-w-full  ">
-      <div className="flex flexcolumncontainer flex-row min-h-[50px] max-h-[50px] bg-gray-50 md:space-x-8 lg:space-x-8 space-x-7 flex-wrap items-center justify-center">
+      <div className=" shadow shadow-xl hover:shadow-lg bg-white mb-2 flex flexcolumncontainer flex-row min-h-[50px] max-h-[50px] md:space-x-8 lg:space-x-8 space-x-7 flex-wrap items-center justify-center">
         <IconBage
           IconName="New Task"
           Showcount="4"

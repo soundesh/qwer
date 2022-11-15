@@ -6,7 +6,7 @@ const ReuseIndexPage = ({ children, LinkMenu }) => {
       <div className="lg:hidden   min-h-full">
         <div className="grow  border  border-blue-300">
           {/*....main*/}
-          <div className="z-10   max-w-[600px]">
+          <div className="z-10 bg-slate-200  h-[94vh]   max-w-[600px]">
             {children}
             <div>
               <div className="fixed lg:hidden bottom-0 left-0 min-w-full max-w-full w-full ">
@@ -68,7 +68,7 @@ const ReuseIndexPage = ({ children, LinkMenu }) => {
         </div>
 
         {/*....main*/}
-        <div className="border border-blue-300 grow">
+        <div className="border  bg-slate-200  h-[94vh]  border-blue-300 grow">
           <div className="z-10 ">
             {children}
             <div>

@@ -3,6 +3,8 @@ import { EmpGlobalState } from "../../../Globalsate/EmpGlobalState";
 import { Paper } from "@mui/material";
 import SelectorFrom from "../../../assitComponet/SelectorFrom";
 
+import ReuseButton from "../../../assitComponet/button/ReuseButton";
+import VIewdetailheader from "../../../assitComponet/Viewdetail/VIewdetailheader";
 const AssignTask = () => {
   const { dataCreate, datadispatCreate } = useContext(EmpGlobalState);
 
@@ -39,23 +41,10 @@ const AssignTask = () => {
         <div className="lg:mx-1 mx-1   lg:max-w-full md:max-w-full lg:min-w-[400px] rounded-lg max-w-[270px] justify-center ">
           <Paper>
             <div className=" border-2 border-gray-400  p-4 rounded-lg">
-              <div className="headerfont bg-indigo-700 text-white flex justify-between  lg:py-2 lg:pl-2 lg:text-xl md:text-xl text-xl ">
-                <div>
-                  <h1>Assign New Task</h1>
-                </div>
-                <div
-                  onClick={() => {
-                    datadispatCreate({
-                      type: "normal",
-                    });
-                  }}
-                >
-                  <h1 className="font-bold text-2xl text-white pr-5 hover:text-3xl">
-                    X
-                  </h1>
-                </div>
-              </div>
-
+              <VIewdetailheader
+                title="Assign New Task"
+                Singledatadispatch={datadispatCreate}
+              />
               <form
                 onSubmit={onAssigntaskSubmit}
                 className=" flex flex-col items-center justify-center   "
@@ -106,13 +95,11 @@ const AssignTask = () => {
                     Triggername="taskassigned"
                   />
                 </div>
-
-                <button
-                  type="submit"
-                  className="hover:bg-blue-800 rounded-lg bg-blue-600  text-white flex justify-center py-2 px-2 items-center"
-                >
-                  Add task
-                </button>
+                <ReuseButton
+                  btncolor="blue"
+                  btntype="submit"
+                  btnname="Add task"
+                />
               </form>
             </div>
           </Paper>

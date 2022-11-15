@@ -1,10 +1,10 @@
 import React, { useReducer } from "react";
 
-export const EmpGlobalState = React.createContext();
+export const TeamGlobalState = React.createContext();
 
-export const EmpDataProvider = ({ children }) => {
+export const TeamDataProvider = ({ children }) => {
   const initialState = {
-    projectdetail: [{}],
+    projectdetail: {},
     veiwdetail: true,
     editdetail: true,
     showdetail: false,
@@ -19,7 +19,7 @@ export const EmpDataProvider = ({ children }) => {
           ...state,
           projectdetail: action.value,
           editdetail: false,
-          showdetail: action.showdetail,
+          showdetail: true,
           createState: true,
         };
       case "view":
@@ -27,7 +27,7 @@ export const EmpDataProvider = ({ children }) => {
           ...state,
           projectdetail: action.value,
           editdetail: true,
-          showdetail: action.showdetail,
+          showdetail: true,
           createState: true,
         };
 
@@ -50,14 +50,6 @@ export const EmpDataProvider = ({ children }) => {
           showdetail: false,
           veiwdetail: false,
         };
-      //normal table holiday
-      case "editState":
-        return {
-          ...state,
-          createState: false,
-          editdetail: false,
-          projectdetail: action.value,
-        };
 
       case "normal":
         return {
@@ -73,13 +65,11 @@ export const EmpDataProvider = ({ children }) => {
         return state;
     }
   };
-
   const [singledata, Singledatadispatch] = useReducer(reducer, initialState);
 
   const [dataleave, datadispatchleave] = useReducer(reducer, initialState);
 
   const [dataCreate, datadispatCreate] = useReducer(reducer, initialState);
-  const [dataholiday, datadispatcholiday] = useReducer(reducer, initialState);
 
   const state = {
     singledata,
@@ -88,10 +78,7 @@ export const EmpDataProvider = ({ children }) => {
     datadispatchleave,
     dataCreate,
     datadispatCreate,
-    dataholiday,
-    datadispatcholiday,
   };
-  return (
-    <EmpGlobalState.Provider value={state}>{children}</EmpGlobalState.Provider>
-  );
+
+  <TeamGlobalState.Provider value={state}>{children}</TeamGlobalState.Provider>;
 };

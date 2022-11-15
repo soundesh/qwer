@@ -20,7 +20,7 @@ const Hrholidaytable = ({ hideBtn, initialData }) => {
   const onhandleDelete = (deleteItem) => {
     if (window.confirm("please conform to delete")) {
       const data = allData.filter((item) => {
-        return Object.values(item)[0] !== Object.values(deleteItem)[0];
+        return Object.values(item)[0] !== deleteItem;
       });
       setAllData(data);
       setFilteredData(data);
@@ -87,15 +87,15 @@ const Hrholidaytable = ({ hideBtn, initialData }) => {
                       onClick={
                         hideBtn
                           ? () => {
-                              OnhandleEdit(item);
+                              OnhandleEdit(Object.values(item)[0]);
                             }
                           : () => {}
                       }
                       className="bg-white  leading-5 min-w-[150px] font-medium "
                     >
-                      <td className="geeks">{item.leavedate}</td>
-                      <td className="geeks">{item.leavetype}</td>
-                      <td className="geeks">{item.holiday}</td>
+                      <td>{item.leavedate}</td>
+                      <td>{item.leavetype}</td>
+                      <td>{item.holiday}</td>
                     </tr>
                   );
                 })}

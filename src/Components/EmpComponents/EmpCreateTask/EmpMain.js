@@ -268,7 +268,7 @@ const EmpMain = () => {
 
   return (
     <div className="flex flex-col justify-center  min-w-[300px] ">
-      <div className="border-b-2 flex flexcolumncontainer flex-row min-h-[50px] max-h-[50px] bg-gray-50 md:space-x-8 lg:space-x-8 space-x-7 flex-wrap items-center justify-center">
+      <div className="shadow shadow-xl hover:shadow-lg bg-white mb-2 border-b-2 flex flexcolumncontainer flex-row min-h-[50px] max-h-[50px]  md:space-x-8 lg:space-x-8 space-x-7 flex-wrap items-center justify-center">
         <IconBage
           IconName="New Task"
           Showcount="4"

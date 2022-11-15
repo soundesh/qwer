@@ -19,7 +19,6 @@ const ReuseTextInput = ({
   //   rows="2"
   //   cols="30"/>
 
-  console.log(labelname);
   return (
     <div>
       <div key={name}>

@@ -1,22 +1,68 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
-import EmpTask from "../Components/EmpComponents/Emptask/EmpTask";
-import EmployeeIndexpage from "../pages/Emppages/EmployeeIndexpage";
-import EmpLeave from "../Components/EmpComponents/Empleave/EmpLeave";
-import EmpHoliday from "../Components/EmpComponents/EmpHoliday/EmpHoliday";
-import EmpCreateTask from "../Components/EmpComponents/EmpCreateTask/EmpCreateTask";
-import ProjectAssignDetail from "../Components/EmpComponents/EmpProjectCreate/ProjectAssignDetail";
+
+import { EmpDataProvider } from "../Globalsate/EmpGlobalState";
+
+const EmppaySlip = lazy(() =>
+  import("../Components/EmpComponents/Emppayslip.js/EmppaySlip")
+);
+const EmpTask = lazy(() =>
+  import("../Components/EmpComponents/Emptask/EmpTask")
+);
+const EmployeeIndexpage = lazy(() =>
+  import("../pages/Emppages/EmployeeIndexpage")
+);
+
+const EmpLeave = lazy(() =>
+  import("../Components/EmpComponents/Empleave/EmpLeave")
+);
+const EmpHoliday = lazy(() =>
+  import("../Components/EmpComponents/EmpHoliday/EmpHoliday")
+);
+
 const EmployeeRoute = () => {
   return (
-    <EmployeeIndexpage>
-      <Routes>
-        <Route path="/" element={<EmpTask />} />
-        <Route path="/empleave" element={<EmpLeave />} />
-        <Route path="/empholiday" element={<EmpHoliday />} />
-        <Route path="/empcreatetask" element={<EmpCreateTask />} />
-        <Route path="/empassign" element={<ProjectAssignDetail />} />
-      </Routes>
-    </EmployeeIndexpage>
+    <EmpDataProvider>
+      <Suspense fallback={<>Loading ...</>}>
+        <EmployeeIndexpage>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Suspense fallback={<>Loading ...</>}>
+                  <EmpTask />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/empleave"
+              element={
+                <Suspense fallback={<>Loading ...</>}>
+                  <EmpLeave />
+                </Suspense>
+              }
+            />
+
+            <Route
+              path="/emppayslip"
+              element={
+                <Suspense fallback={<>Loading ...</>}>
+                  <EmppaySlip />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/empholiday"
+              element={
+                <Suspense fallback={<>Loading ...</>}>
+                  <EmpHoliday />
+                </Suspense>
+              }
+            />
+          </Routes>
+        </EmployeeIndexpage>
+      </Suspense>
+    </EmpDataProvider>
   );
 };
 

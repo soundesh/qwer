@@ -1,7 +1,13 @@
 import React, { useContext, useState } from "react";
 import { EmpGlobalState } from "../../../Globalsate/EmpGlobalState";
+import ReuseButton from "../../../assitComponet/button/ReuseButton";
+import ReuseTextInput from "../../../assitComponet/Input/ReuseTextInput";
+import Reuseinput from "../../../assitComponet/Input/Reuseinput";
+import ReuseInputDate from "../../../assitComponet/Input/ReuseInputDate";
+
+import SelectorFrom from "../../../assitComponet/Input/SelectorFrom";
+import VIewdetailheader from "../../../assitComponet/Viewdetail/VIewdetailheader";
 import { Paper } from "@mui/material";
-import moment from "moment";
 const EmpLeaveAdd = () => {
   const [ApplyLeave, setApplyLeave] = useState({
     date: " ",
@@ -67,6 +73,8 @@ const EmpLeaveAdd = () => {
       window.alert("please click valid calender date");
     } else {
       console.log("validate");
+
+      console.log(ApplyLeave);
     }
   };
 
@@ -76,153 +84,82 @@ const EmpLeaveAdd = () => {
         <div className="lg:mx-1 mx-1   lg:max-w-full md:max-w-full lg:min-w-[400px] rounded-lg max-w-[270px] justify-center ">
           <Paper>
             <div className=" border-2 border-gray-400  p-4 rounded-lg">
-              <div className="headerfont bg-indigo-700 text-white flex justify-between  lg:py-2 lg:pl-2 lg:text-xl md:text-xl text-xl ">
-                <div>
-                  <h1>Apply Leave</h1>
-                </div>
-                <div
-                  onClick={() => {
-                    datadispatchleave({
-                      type: "normal",
-                    });
-                  }}
-                >
-                  <h1 className="font-bold text-2xl text-white pr-5 hover:text-3xl">
-                    X
-                  </h1>
-                </div>
-              </div>
+              <VIewdetailheader
+                title="Apply Leave"
+                Singledatadispatch={datadispatchleave}
+              />
 
               <form
                 onSubmit={onsubmitApplyLeave}
                 className=" flex flex-col items-center justify-center   "
               >
                 <div>
-                  <div className="max-w-[270px] p-1  flex flex-col m-1   ">
-                    <label
-                      htmlFor="to"
-                      className="text-blue-400  max-h-[50px] text-base uppercase "
-                    >
-                      Apply Date
-                    </label>
-
-                    <input
-                      type="text"
-                      name="Date"
-                      value={TodayDate}
-                      readOnly
-                      size={10}
-                      className="resize-none border-indigo-800 rounded-md border-2 min-w-[200px] md:min-w-[200px] lg:min-w-[140px] p-2"
-                      onChange={(e) => {
-                        onChangeapplyLeave(e);
-                      }}
+                  <div className="hidden max-w-[270px] p-1  flex flex-col m-1   ">
+                    <ReuseInputDate
+                      labelname="Apply Date"
+                      name="date"
+                      defaultValue={today().split("-").reverse().join("/")}
+                      setTrigger={setApplyLeave}
+                      Trigger={ApplyLeave}
+                      inputdesign={"border-indigo-800 max-w-[200px]"}
                     />
                   </div>
                   <div className="max-w-[270px] p-1  flex flex-col m-1   ">
-                    <label
-                      htmlFor="leaveType"
-                      className="text-blue-400  max-h-[50px] text-base uppercase "
-                    >
-                      Leave type
-                    </label>
-                    <select
+                    <SelectorFrom
+                      labeled="Leave Type"
                       name="leaveType"
-                      id="leaveType"
-                      className="resize-none border-indigo-800 rounded-md border-2 min-w-[200px] md:min-w-[200px] lg:min-w-[140px] p-2"
-                      onChange={(e) => {
-                        onChangeapplyLeave(e);
-                      }}
-                    >
-                      <option value="select">select</option>
-                      <option value="CL">CL</option>
-                      <option value="EL">EL</option>
-                      <option value="CompOff">Comp OFF</option>
-                      <option value="RH">RH</option>
-                    </select>
+                      defaultValue={ApplyLeave.leaveType}
+                      labeldesign="text-blue-400  text-base uppercase"
+                      OptionData={["Select", "CL", "EL", "COMP OFF", "RH"]}
+                      sizewidth="border-indigo-800"
+                      setTrigger={setApplyLeave}
+                      Trigger={ApplyLeave}
+                    />
                   </div>
 
                   <div
                     key="reason"
                     className="max-w-[270px] p-1  flex flex-col m-1   "
                   >
-                    <label
-                      htmlFor="reason"
-                      className="text-blue-400  text-base uppercase"
-                    >
-                      reason
-                    </label>
-
-                    <input
-                      id="reason"
-                      type="text"
+                    <Reuseinput
                       name="reason"
-                      placeholder="reason"
-                      size="4"
-                      onChange={(e) => {
-                        onChangeapplyLeave(e);
-                      }}
-                      className="resize-none border-indigo-800 rounded-md border-2 min-w-[200px] md:min-w-[200px] lg:min-w-[140px] p-2"
+                      onchanged={onChangeapplyLeave}
+                      labelname={"Reason"}
+                      inputdesign="max-w-[200px] border-indigo-800 "
                     />
                   </div>
 
                   <div className="max-w-[270px] p-1  flex flex-col m-1   ">
-                    <label
-                      htmlFor="to"
-                      className="text-blue-400  max-h-[50px] text-base uppercase "
-                    >
-                      Start Date
-                    </label>
-                    <input
-                      type="date"
+                    <ReuseInputDate
+                      labelname="Start Date"
                       name="from"
-                      className="resize-none border-indigo-800 rounded-md border-2 min-w-[200px] md:min-w-[200px] lg:min-w-[140px] p-2"
-                      onChange={(e) => {
-                        setApplyLeave({
-                          ...ApplyLeave,
-                          from: moment(e.target.value).format("DD/MM/YYYY"),
-                        });
-                      }}
+                      defaultValue={today().split("-").reverse().join("/")}
+                      setTrigger={setApplyLeave}
+                      Trigger={ApplyLeave}
+                      inputdesign={"border-indigo-800 max-w-[200px]"}
                     />
                   </div>
                   <div className="max-w-[270px] p-1  flex flex-col m-1   ">
-                    <label
-                      htmlFor="to"
-                      className="text-blue-400  max-h-[50px] text-base uppercase "
-                    >
-                      Last Date
-                    </label>
-                    <input
-                      type="date"
+                    <ReuseInputDate
+                      labelname="Last Date"
                       name="to"
-                      className="resize-none border-indigo-800 rounded-md border-2 min-w-[200px] md:min-w-[200px] lg:min-w-[140px] p-2"
-                      onChange={(e) => {
-                        setApplyLeave({
-                          ...ApplyLeave,
-                          to: moment(e.target.value).format("DD/MM/YYYY"),
-                        });
-                      }}
+                      defaultValue=""
+                      setTrigger={setApplyLeave}
+                      Trigger={ApplyLeave}
+                      inputdesign={"border-indigo-800 max-w-[200px]"}
                     />
                   </div>
 
                   <div className="max-w-[270px] p-1  flex flex-col m-1   ">
-                    <label
-                      htmlFor="reasonleave"
-                      className="text-blue-400  max-h-[50px] text-base uppercase "
-                    >
-                      reason in Detail
-                    </label>
-                    <textarea
-                      id="reasonleave"
+                    <ReuseTextInput
                       name="reasonleave"
-                      rows="3"
-                      cols="25"
-                      placeholder="reason in detailed"
-                      className="py-1 px-2 resize-none border-indigo-800 rounded-md border-2 min-w-[200px] md:min-w-[200px] lg:min-w-[140px]"
+                      onchanged={onChangeapplyLeave}
+                      labelname="Reason leave"
+                      inputdesign=" border-indigo-800 "
                       maxLength="70"
-                      onChange={(e) => {
-                        onChangeapplyLeave(e);
-                      }}
-                    ></textarea>
+                      rows="2"
+                      cols="30"
+                    />
                   </div>
                   <div className="max-w-[270px] p-1  flex flex-col m-1   ">
                     <h1 className="text-blue-400  max-h-[50px] text-base uppercase ">
@@ -234,12 +171,11 @@ const EmpLeaveAdd = () => {
                   </div>
                 </div>
 
-                <button
-                  type="submit"
-                  className="hover:bg-blue-800 rounded-lg bg-blue-600  text-white flex justify-center py-2 px-2 items-center"
-                >
-                  Add Leave
-                </button>
+                <ReuseButton
+                  btncolor="blue"
+                  btntype="submit"
+                  btnname=" Add Leave"
+                />
               </form>
             </div>
           </Paper>

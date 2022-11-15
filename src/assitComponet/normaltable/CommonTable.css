@@ -16,14 +16,15 @@
   text-align: center;
   line-height: 20px;
   align-items: center;
-  padding: 10px;
+  object-fit: cover;
+  padding: 2px;
 }
 
 /* // background: #def3fa;*/
 .CommonTable td {
   text-align: center;
   line-height: 20px;
-  border: 2px solid gray;
+  border: 1px solid gray;
   border-left: hidden;
   border-right: hidden;
   align-items: center;

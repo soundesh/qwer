@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { EmpGlobalState } from "../../../Globalsate/EmpGlobalState";
 import Footerbtn from "../../../assitComponet/Viewdetail/Footerbtn";
 import { Paper } from "@mui/material";
-import SelectorFrom from "../../../assitComponet/SelectorFrom";
+import SelectorFrom from "../../../assitComponet/Input/SelectorFrom";
 import VIewdetailheader from "../../../assitComponet/Viewdetail/VIewdetailheader";
 
 import ReuseTextInput from "../../../assitComponet/Input/ReuseTextInput";
@@ -34,14 +34,13 @@ const EmpLeaveVIewDetail = ({ headerData }) => {
       type: "normal",
     });
   };
-
-  const Datakey = Object.keys(dataleave.projectdetail);
-  const Datavalue = Object.values(dataleave.projectdetail);
+  const Datakey = Object.keys(...dataleave.projectdetail);
+  const Datavalue = Object.values(...dataleave.projectdetail);
   return (
     <div>
       {dataleave.showdetail ? (
-        <Paper className="flex flex-col items-center justify-center">
-          <div className="lg:mx-1 mx-1  lg:max-w-full md:max-w-full lg:min-w-[500px]  min-w-[280px] justify-center lg:my-2">
+        <div className="pt-2 bg-white border-2 border-gray-400 rounded-lg    lg:max-w-full md:max-w-full lg:min-w-[500px] max-w-[270px] justify-center lg:my-2">
+          <Paper>
             <VIewdetailheader
               title="Leave Detail"
               Singledatadispatch={datadispatchleave}
@@ -67,106 +66,145 @@ const EmpLeaveVIewDetail = ({ headerData }) => {
                 </div>
               ) : (
                 <div className="lg:flex md:flex md:flex-wrap md:pt-1 lg:flex-wrap lg:pt-1 ">
-                  {Datakey.map((item, index) => {
-                    if (index >= 11) {
-                      return (
-                        <SingleDatasize
-                          index={index}
-                          headerData={headerData}
-                          singledata={dataleave}
-                        />
-                      );
-                    }
+                  {window.location.pathname === "/empleave"
+                    ? Datakey.map((item, index) => {
+                        if (index >= 11) {
+                          return (
+                            <SingleDatasize
+                              index={index}
+                              headerData={headerData}
+                              singledata={dataleave}
+                            />
+                          );
+                        }
 
-                    if (Datakey[0] === item) {
-                      return <React.Fragment key={index}></React.Fragment>;
-                    }
+                        if (Datakey[0] === item) {
+                          return <React.Fragment key={index}></React.Fragment>;
+                        }
 
-                    if (index <= 3) {
-                      return (
-                        <SingleDatasize
-                          index={index}
-                          headerData={headerData}
-                          singledata={dataleave}
-                        />
-                      );
-                    }
+                        if (index <= 3) {
+                          return (
+                            <SingleDatasize
+                              index={index}
+                              headerData={headerData}
+                              singledata={dataleave}
+                            />
+                          );
+                        }
 
-                    if (index >= 4 && index <= 5) {
-                      return (
-                        <ReuseInputDate
-                          labelname="Date"
-                          name={Datakey[index]}
-                          defaultValue={Datavalue[index]}
-                          setTrigger={setUpdateTaskData}
-                          Trigger={updateTaskData}
-                          Triggername="taskdate"
-                          inputdesign={"border-indigo-800 max-w-[140px]"}
-                        />
-                      );
-                    }
+                        if (index >= 4 && index <= 5) {
+                          return (
+                            <ReuseInputDate
+                              labelname="Date"
+                              name={Datakey[index]}
+                              defaultValue={Datavalue[index]}
+                              setTrigger={setUpdateTaskData}
+                              Trigger={updateTaskData}
+                              Triggername="taskdate"
+                              inputdesign={"border-indigo-800 max-w-[140px]"}
+                            />
+                          );
+                        }
 
-                    if (index === 8) {
-                      return (
-                        <div className="  flex py-1 px-2 items-center ">
-                          <SelectorFrom
-                            labeled="Leave Type"
-                            defaultValue={updateTaskData.leaveType}
-                            labeldesign="text-blue-400  text-base uppercase"
-                            OptionData={[
-                              "Select",
-                              "CL",
-                              "EL",
-                              "COMP OFF",
-                              "RH",
-                            ]}
-                            sizewidth="1"
-                            setTrigger={setUpdateTaskData}
-                            Trigger={updateTaskData}
-                            Triggername="leaveType"
+                        if (index === 8) {
+                          return (
+                            <div className="  flex py-1 px-2 items-center ">
+                              <SelectorFrom
+                                labeled="Leave Type"
+                                defaultValue={updateTaskData.leaveType}
+                                labeldesign="text-blue-400  text-base uppercase"
+                                OptionData={[
+                                  "Select",
+                                  "CL",
+                                  "EL",
+                                  "COMP OFF",
+                                  "RH",
+                                ]}
+                                sizewidth="1"
+                                setTrigger={setUpdateTaskData}
+                                Trigger={updateTaskData}
+                                Triggername="leaveType"
+                              />
+                            </div>
+                          );
+                        }
+
+                        if (index === 9) {
+                          return (
+                            <div key={index} className="max-w-[140px] p-1 m-1">
+                              <Reuseinput
+                                name={Datakey[index]}
+                                defaultValue={Datavalue[index]}
+                                onchanged={onChangeUpdate}
+                                labelname={Datakey[index]}
+                                inputdesign="max-w-[140px] border-indigo-800 "
+                              />
+                            </div>
+                          );
+                        }
+                        if (index === 10) {
+                          return (
+                            <div key="reasonleave">
+                              <ReuseTextInput
+                                name="reasonleave"
+                                defaultValue={Datavalue[index]}
+                                onchanged={onChangeUpdate}
+                                labelname="Reason leave"
+                                inputdesign=" border-indigo-800 "
+                                maxLength="70"
+                                rows="2"
+                                cols="30"
+                              />
+                            </div>
+                          );
+                        }
+
+                        return (
+                          <SingleDatasize
+                            index={index}
+                            headerData={headerData}
+                            singledata={dataleave}
                           />
-                        </div>
-                      );
-                    }
+                        );
+                      })
+                    : null}
+                  {/* level 1 approver */}
+                  {window.location.pathname === "/teamapprove"
+                    ? Datakey.map((item, index) => {
+                        if (Datakey[0] === item) {
+                          return <React.Fragment key={index}></React.Fragment>;
+                        }
 
-                    if (index === 9) {
-                      return (
-                        <div key={index} className="max-w-[140px] p-1 m-1">
-                          <Reuseinput
-                            name={Datakey[index]}
-                            defaultValue={Datavalue[index]}
-                            onchanged={onChangeUpdate}
-                            labelname={Datakey[index]}
-                            inputdesign="max-w-[140px] border-indigo-800 "
-                          />
-                        </div>
-                      );
-                    }
-                    if (index === 10) {
-                      return (
-                        <div key="reasonleave">
-                          <ReuseTextInput
-                            name="reasonleave"
-                            defaultValue={Datavalue[index]}
-                            onchanged={onChangeUpdate}
-                            labelname="Reason leave"
-                            inputdesign=" border-indigo-800 "
-                            maxLength="70"
-                            rows="2"
-                            cols="30"
-                          />
-                        </div>
-                      );
-                    }
+                        if (index === 11) {
+                          return (
+                            <div className="  flex py-1 px-2 items-center ">
+                              <SelectorFrom
+                                labeled="Level 1 Approver"
+                                defaultValue={updateTaskData.leaveType}
+                                labeldesign="text-blue-400  text-base uppercase"
+                                OptionData={[
+                                  "Select",
+                                  "Approved",
+                                  "Not approved",
+                                ]}
+                                sizewidth="1"
+                                setTrigger={setUpdateTaskData}
+                                Trigger={updateTaskData}
+                                Triggername="leaveType"
+                              />
+                            </div>
+                          );
+                        }
 
-                    return (
-                      <SingleDatasize
-                        index={index}
-                        headerData={headerData}
-                        singledata={dataleave}
-                      />
-                    );
-                  })}
+                        return (
+                          <SingleDatasize
+                            index={index}
+                            headerData={headerData}
+                            singledata={dataleave}
+                          />
+                        );
+                      })
+                    : null}
                 </div>
               )}
               <Footerbtn
@@ -174,8 +212,8 @@ const EmpLeaveVIewDetail = ({ headerData }) => {
                 Singledatadispatch={datadispatchleave}
               />
             </form>
-          </div>
-        </Paper>
+          </Paper>
+        </div>
       ) : null}
     </div>
   );

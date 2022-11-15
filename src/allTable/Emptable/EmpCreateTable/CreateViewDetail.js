@@ -4,27 +4,13 @@ import Footerbtn from "../../../assitComponet/Viewdetail/Footerbtn";
 import SelectorFrom from "../../../assitComponet/SelectorFrom";
 import VIewdetailheader from "../../../assitComponet/Viewdetail/VIewdetailheader";
 
+import ReuseTextInput from "../../../assitComponet/Input/ReuseTextInput";
 import SingleDatasize from "../../../assitComponet/Viewdetail/SingleDatasize";
 import { Paper } from "@mui/material";
 const CreateViewDetail = ({ headerData }) => {
   const { dataCreate, datadispatCreate } = useContext(EmpGlobalState);
 
-  const [updateTaskData, setUpdateTaskData] = useState({
-    id: "1233",
-    taskdate: "",
-    taskgiven: "",
-    taskassigned: "",
-    project: "",
-    task: "",
-    Approverremarks: "",
-    empremarks: "",
-    worked: "",
-    clocked: "",
-    utilised: "",
-    efficiency: "",
-    taskStatus: "",
-    approvedstatus: "",
-  });
+  const [updateTaskData, setUpdateTaskData] = useState({});
   useEffect(() => {
     if (dataCreate.projectdetail !== {})
       setUpdateTaskData(dataCreate.projectdetail);
@@ -48,11 +34,12 @@ const CreateViewDetail = ({ headerData }) => {
     console.log("emp task update ", updateTaskData);
   };
 
+  const Datavalues = Object.values(...dataCreate.projectdetail);
   return (
     <div>
       {dataCreate.showdetail ? (
-        <Paper>
-          <div className="p-4 border-2 border-gray-400 rounded-lg lg:mx-1 mx-1   lg:max-w-full md:max-w-full lg:min-w-[500px] max-w-[270px] justify-center lg:my-2">
+        <div className="pt-2 bg-white border-2 border-gray-400 rounded-lg    lg:max-w-full md:max-w-full lg:min-w-[500px] max-w-[270px] justify-center lg:my-2">
+          <Paper>
             <VIewdetailheader
               title="Assign Task"
               Singledatadispatch={datadispatCreate}
@@ -63,12 +50,12 @@ const CreateViewDetail = ({ headerData }) => {
               className="flex flex-col items-center justify-center"
             >
               <div className="lg:flex md:flex md:flex-wrap md:pt-1 lg:flex-wrap lg:pt-1  rounded-[4px] lg:mx-2">
-                {Object.keys(dataCreate.projectdetail).map((item, index) => {
+                {Object.keys(...dataCreate.projectdetail).map((item, index) => {
                   if (Object.keys(dataCreate.projectdetail)[0] === item) {
                     return <React.Fragment key={index}></React.Fragment>;
                   }
 
-                  if (index >= 4 && index <= 5) {
+                  if (index === 4) {
                     return (
                       <div
                         key={index}
@@ -78,7 +65,7 @@ const CreateViewDetail = ({ headerData }) => {
                           {headerData[index]}
                         </div>
                         <div className="ml-4 p-0.5 text-gray-500 max-w-[140px]  text-sm  ">
-                          {Object.values(dataCreate.projectdetail)[index]}
+                          {Datavalues[index]}
                         </div>
                       </div>
                     );
@@ -90,55 +77,17 @@ const CreateViewDetail = ({ headerData }) => {
                   if (index === 1) {
                     return (
                       <div>
-                        {dataCreate.editdetail ? (
-                          <div
-                            key={index}
-                            className="min-w-[140px] p-1  max-w-[280px] m-1 max-h-[50pxpx] "
-                          >
-                            <div className="text-blue-400  text-base uppercase ">
-                              {headerData[index]}
-                            </div>
-                            <div className="ml-4 text-gray-500    text-sm ">
-                              {Object.values(dataCreate.projectdetail)[index]}
-                            </div>
+                        <div
+                          key={index}
+                          className="min-w-[140px] p-1  max-w-[280px] m-1 max-h-[50pxpx] "
+                        >
+                          <div className="text-blue-400  text-base uppercase ">
+                            {headerData[index]}
                           </div>
-                        ) : (
-                          <div
-                            key={Object.keys(dataCreate.projectdetail)[index]}
-                            className="max-w-[140px] p-1   m-1  mr-4 "
-                          >
-                            <label
-                              htmlFor={
-                                Object.keys(dataCreate.projectdetail)[index]
-                              }
-                              className="text-blue-400  text-base uppercase"
-                            >
-                              {headerData[index]}
-                            </label>
-
-                            <input
-                              id={Object.keys(dataCreate.projectdetail)[index]}
-                              type="date"
-                              defaultValue={Object.values(
-                                dataCreate.projectdetail
-                              )
-                                [index].split("/")
-                                .reverse()
-                                .join("-")}
-                              name={
-                                Object.keys(dataCreate.projectdetail)[index]
-                              }
-                              placeholder={
-                                Object.keys(dataCreate.projectdetail)[index]
-                              }
-                              size="4"
-                              onChange={(e) => {
-                                onChangeUpdate(e);
-                              }}
-                              className=" outline-none border-indigo-800 rounded-md border-2 min-w-[150px] md:min-w-[200px] lg:min-w-[140px] p-2"
-                            />
+                          <div className="ml-4 text-gray-500    text-sm ">
+                            {Datavalues[index]}
                           </div>
-                        )}
+                        </div>
                       </div>
                     );
                   }
@@ -151,7 +100,7 @@ const CreateViewDetail = ({ headerData }) => {
                         {headerData[index]}
                       </div>
                       <div className="ml-4 text-gray-500    text-sm ">
-                        {Object.values(dataCreate.projectdetail)[index]}
+                        {Datavalues[index]}
                       </div>
                     </div>
                   );
@@ -159,45 +108,47 @@ const CreateViewDetail = ({ headerData }) => {
               </div>
               {dataCreate.editdetail ? (
                 <div className="lg:flex md:flex md:flex-wrap md:pt-1 lg:flex-wrap lg:pt-1 ">
-                  {Object.keys(dataCreate.projectdetail).map((item, index) => {
-                    if (index >= 6 && index <= 7) {
-                      return (
-                        <div
-                          key={index}
-                          className="min-w-[220px]  max-w-[280px] m-1 max-h-[220px] "
-                        >
-                          <div className="text-blue-400  max-h-[50px] text-base uppercase ">
-                            {headerData[index]}
+                  {Object.keys(...dataCreate.projectdetail).map(
+                    (item, index) => {
+                      if (index >= 6 && index <= 7) {
+                        return (
+                          <div
+                            key={index}
+                            className="min-w-[220px]  max-w-[280px] m-1 max-h-[220px] "
+                          >
+                            <div className="text-blue-400  max-h-[50px] text-base uppercase ">
+                              {headerData[index]}
+                            </div>
+                            <div className="ml-4 text-gray-500 max-w-[200px]  p-0.5  min-h-[60px] text-sm ">
+                              {Datavalues[index]}
+                            </div>
                           </div>
-                          <div className="ml-4 text-gray-500 max-w-[200px]  p-0.5  min-h-[60px] text-sm ">
-                            {Object.values(dataCreate.projectdetail)[index]}
-                          </div>
-                        </div>
-                      );
-                    }
+                        );
+                      }
 
-                    if (
-                      index > 7 &&
-                      index <= Object.keys(dataCreate.projectdetail).length
-                    ) {
-                      return (
-                        <SingleDatasize
-                          index={index}
-                          headerData={headerData}
-                          singledata={dataCreate}
-                        />
-                      );
-                    }
+                      if (
+                        index > 7 &&
+                        index <= Object.keys(...dataCreate.projectdetail).length
+                      ) {
+                        return (
+                          <SingleDatasize
+                            index={index}
+                            headerData={headerData}
+                            singledata={dataCreate}
+                          />
+                        );
+                      }
 
-                    return <React.Fragment key={index}></React.Fragment>;
-                  })}
+                      return <React.Fragment key={index}></React.Fragment>;
+                    }
+                  )}
                 </div>
               ) : (
                 <div>
                   <div className="flex flex-row flex-wrap  ">
-                    {Object.keys(dataCreate.projectdetail).map(
+                    {Object.keys(...dataCreate.projectdetail).map(
                       (item, index) => {
-                        if (index === 5) {
+                        if (index === 7) {
                           return (
                             <div
                               key={index}
@@ -207,7 +158,7 @@ const CreateViewDetail = ({ headerData }) => {
                                 {headerData[index]}
                               </div>
                               <div className="ml-4 text-gray-500 max-w-[200px]  p-0.5  min-h-[60px] text-sm ">
-                                {Object.values(dataCreate.projectdetail)[index]}
+                                {Datavalues[index]}
                               </div>
                             </div>
                           );
@@ -215,36 +166,17 @@ const CreateViewDetail = ({ headerData }) => {
 
                         if (index === 6) {
                           return (
-                            <div>
-                              <div key="Approverremarks">
-                                <div>
-                                  <label
-                                    htmlFor="Approverremarks"
-                                    className="text-blue-400  max-h-[50px] text-base uppercase "
-                                  >
-                                    Approver Remarks
-                                  </label>
-                                </div>
-
-                                <textarea
-                                  id="Approverremarks"
-                                  name="Approverremarks"
-                                  type="text"
-                                  defaultValue={
-                                    Object.values(dataCreate.projectdetail)[
-                                      index
-                                    ]
-                                  }
-                                  rows="2"
-                                  cols="30"
-                                  placeholder="Approver remarks"
-                                  onChange={(e) => {
-                                    onChangeUpdate(e);
-                                  }}
-                                  className="resize-none border-indigo-800 rounded-md border-2 max-w-[200px] lg:min-w-[200px] md:min-w-[200px]"
-                                  maxLength="70"
-                                ></textarea>
-                              </div>
+                            <div key={index}>
+                              <ReuseTextInput
+                                name="Approverremarks"
+                                defaultValue={Datavalues[index]}
+                                onchanged={onChangeUpdate}
+                                labelname="Approver Remarks"
+                                inputdesign=" border-indigo-800 m-3 "
+                                maxLength="70"
+                                rows="2"
+                                cols="30"
+                              />
                             </div>
                           );
                         }
@@ -268,7 +200,7 @@ const CreateViewDetail = ({ headerData }) => {
                           );
                         }
 
-                        if (index >= 10) {
+                        if (index > 6) {
                           return (
                             <SingleDatasize
                               index={index}
@@ -290,8 +222,8 @@ const CreateViewDetail = ({ headerData }) => {
                 />
               </div>
             </form>
-          </div>
-        </Paper>
+          </Paper>
+        </div>
       ) : null}
     </div>
   );

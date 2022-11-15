@@ -1,82 +1,137 @@
 import React, { useState } from "react";
 import CommonTable from "../../assitComponet/normaltable/CommonTable";
+
 const initialState = [
   {
-    id: "126",
+    id: "111",
+    leaveimg: "https://pbs.twimg.com/media/DrM0nIdU0AEhG5b.jpg",
     leavedate: "23/05/22",
     leavetype: "festival",
     holiday: "deepavali",
   },
-  {
-    id: "121",
-    leavedate: "2/03/22",
-    leavetype: "festival",
 
-    holiday: "sri krishnar jemaasvvvvtami ",
-  },
   {
-    id: "123",
+    id: "112",
+    leaveimg: "https://pbs.twimg.com/media/DrM0nIdU0AEhG5b.jpg",
     leavedate: "2/03/22",
     leavetype: "festival",
     holiday: "christmus",
   },
   {
-    id: "124",
+    id: "113",
+    leaveimg: "https://pbs.twimg.com/media/DrM0nIdU0AEhG5b.jpg",
     leavedate: "2/03/22",
     leavetype: "festival",
     holiday: "christmus",
   },
   {
-    id: "125",
+    id: "114",
+    leaveimg: "https://pbs.twimg.com/media/DrM0nIdU0AEhG5b.jpg",
     leavedate: "2/03/22",
     leavetype: "festival",
     holiday: "christmus",
   },
   {
-    id: "123",
+    id: "115",
+    leaveimg: "https://pbs.twimg.com/media/DrM0nIdU0AEhG5b.jpg",
     leavedate: "30/03/22",
     leavetype: "festival",
     holiday: "christmus",
   },
   {
-    id: "123",
+    id: "116",
+    leaveimg: "https://pbs.twimg.com/media/DrM0nIdU0AEhG5b.jpg",
     leavedate: "2/04/22",
     leavetype: "festival",
     holiday: "christmus",
   },
 
   {
-    id: "124",
+    id: "117",
+    leaveimg: "https://pbs.twimg.com/media/DrM0nIdU0AEhG5b.jpg",
     leavedate: "2/01/22",
     leavetype: "RH",
     holiday: "sri krishnar jemaastamivvvvv",
   },
-  { id: "128", leavedate: "23/05/22", leavetype: "RH", holiday: "pongal" },
-  { id: "129", leavedate: "2/03/22", leavetype: "RH", holiday: "mattu pongal" },
+  {
+    id: "118",
+    leaveimg: "https://pbs.twimg.com/media/DrM0nIdU0AEhG5b.jpg",
+    leavedate: "23/05/22",
+    leavetype: "RH",
+    holiday: "pongal",
+  },
+  {
+    id: "119",
+    leaveimg: "https://pbs.twimg.com/media/DrM0nIdU0AEhG5b.jpg",
+    leavedate: "2/03/22",
+    leavetype: "RH",
+    holiday: "mattu pongal",
+  },
 
   {
-    id: "127",
+    id: "120",
+    leaveimg: "https://pbs.twimg.com/media/DrM0nIdU0AEhG5b.jpg",
     leavedate: "2/01/22",
     leavetype: " general",
     holiday: "kannada rajyotsava",
   },
 
   {
+    id: "121",
+    leaveimg: "https://pbs.twimg.com/media/DrM0nIdU0AEhG5b.jpg",
+    leavedate: "2/04/22",
+    leavetype: "festival",
+    holiday: "christmus",
+  },
+
+  {
     id: "122",
+    leaveimg: "https://pbs.twimg.com/media/DrM0nIdU0AEhG5b.jpg",
+    leavedate: "2/01/22",
+    leavetype: "RH",
+    holiday: "sri krishnar jemaastamivvvvv",
+  },
+  {
+    id: "123",
+    leaveimg: "https://pbs.twimg.com/media/DrM0nIdU0AEhG5b.jpg",
+    leavedate: "23/05/22",
+    leavetype: "RH",
+    holiday: "pongal",
+  },
+  {
+    id: "124",
+    leaveimg: "https://pbs.twimg.com/media/DrM0nIdU0AEhG5b.jpg",
+    leavedate: "2/03/22",
+    leavetype: "RH",
+    holiday: "mattu pongal",
+  },
+
+  {
+    id: "125",
+    leaveimg: "https://pbs.twimg.com/media/DrM0nIdU0AEhG5b.jpg",
+    leavedate: "2/01/22",
+    leavetype: " general",
+    holiday: "kannada rajyotsava",
+  },
+
+  {
+    id: "126",
+    leaveimg: "https://pbs.twimg.com/media/DrM0nIdU0AEhG5b.jpg",
     leavedate: "23/01/22",
     leavetype: "national",
     holiday: "srikrishnar jemaavvvvstami",
   },
   {
-    id: "121",
+    id: "127",
+    leaveimg: "https://pbs.twimg.com/media/DrM0nIdU0AEhG5b.jpg",
     leavedate: "12/05/22",
     leavetype: "national",
     holiday: "independance",
   },
 ];
 
-const dataheader2 = ["Leave date", "Leave Type", "holiday"];
-const YearLeave = () => {
+const headerData = ["image", "date", "Leave Type", "holiday"];
+const YearLeave = ({ datadispatcholiday }) => {
   const [allData, setAllData] = useState(initialState);
   const [filteredData, setFilteredData] = useState(allData);
 
@@ -95,12 +150,13 @@ const YearLeave = () => {
   });
 
   return (
-    <div className="border-2 border-gray-200 p-2">
+    <div className="mt-4">
       <CommonTable
         initialData={allData}
-        headerData={dataheader2}
-        title="Holiday leaves"
-        Design="min-h-[45vh] bg-white "
+        headerData={headerData}
+        title="Month Bases"
+        dispatcheddata={datadispatcholiday}
+        Design="bg-white  shadow shadow-lg hover:shadow-xl max-w-[400px] "
       />
     </div>
   );

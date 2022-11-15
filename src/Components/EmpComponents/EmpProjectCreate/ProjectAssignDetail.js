@@ -161,12 +161,13 @@ const ProjectAssignDetail = () => {
             </button>
           </form>
         </div>
-        <div className="border border-indigo-400 m-1 rounded-[3px]">
-          <div className="flex flex-row  justify-between ">
-            <div className="border-r border-indigo-400 bg-indigo-100">
-              <div className="px-4 flex items-center border-b-2 border-indigo-400 bg-indigo-100 font-semibold min-h-[50px] max-h-[50px]   min-w-full">
-                <h1 className="headerfont  uppercase  pl-2 lg:text-base  md:text-xl text-xl ">
-                  project team
+
+        <div className="  rounded-[3px]">
+          <div className="flex flex-row justify-between ">
+            <div className="bg-white shadow shadow-lg m-1">
+              <div className="px-4 flex items-center  font-semibold min-h-[50px] max-h-[50px]   min-w-full">
+                <h1 className="headerfont text-gray-800 uppercase  pl-2 lg:text-base  md:text-xl text-xl ">
+                  Office Connect
                 </h1>
               </div>
 
@@ -270,15 +271,7 @@ const ProjectAssignDetail = () => {
             <div>
               {/* single data */}
 
-              <div>
-                <div className="px-4 flex items-center border-b-2 border-indigo-400 bg-indigo-100 font-semibold min-h-[50px] max-h-[50px]   min-w-full">
-                  <h1 className="headerfont  uppercase  pl-2 lg:text-base  md:text-xl text-xl ">
-                    project team
-                  </h1>
-                </div>
-              </div>
-
-              <div className="p-2 m-2 Scrollbardesign flex flex-row min-w-[990px] max-w-[110vh] max-h-[600px] overflow-auto ">
+              <div className="m-1  Scrollbardesign flex flex-row min-w-[990px] max-w-[110vh] max-h-[600px] overflow-auto ">
                 <div className="min-w-[270px] max-w-[290px] bg-white min-h-[400px] overflow-hidden    flex flex-col items-center m-1">
                   <div className="shadow shadow-lg   min-w-[270px] w-full flex flex-wrap flex-row justify-between items-center font-semibold">
                     <div className="max-h-[50px] text-xs p-2.5 text-white bg-indigo-600 hover:bg-indigo-700  flex flex-row space-x-2 w-full items-center pl-3">

@@ -12,6 +12,7 @@ const Footerbtn = ({ singledata, Singledatadispatch }) => {
                 Singledatadispatch({
                   type: "view",
                   value: singledata.projectdetail,
+                  showdetail: true,
                 });
               }}
               btntype="button"
@@ -24,6 +25,7 @@ const Footerbtn = ({ singledata, Singledatadispatch }) => {
                 Singledatadispatch({
                   type: "edit",
                   value: singledata.projectdetail,
+                  showdetail: true,
                 });
               }}
               btntype="button"

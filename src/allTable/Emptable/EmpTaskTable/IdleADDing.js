@@ -99,6 +99,7 @@ const IdleADDing = ({ trigger, settrigger }) => {
                     <ReuseInputDate
                       labelname="Date"
                       name="taskdate"
+                      defaultValue={""}
                       setTrigger={setUpdateTaskData}
                       Trigger={updateTaskData}
                       inputdesign={"border-indigo-800 max-w-[140px]"}
